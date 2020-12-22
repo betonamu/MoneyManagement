@@ -18,4 +18,5 @@ public class AddViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
+
 }
