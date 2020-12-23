@@ -7,16 +7,30 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">"Welcome !"</string>
     <string name="title_activity_login">LoginActivity</string>
+
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="re_password">RePassword</string>
+    <string name="prompt_full_name">Full Name</string>
+    <string name="prompt_phone_number">Phone Number</string>
+    <string name="prompt_re_password">RePassword</string>
+
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_up">Sign up</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="action_sign_in_short">Sign In</string>
+
     <string name="invalid_username">Not a valid username</string>
+    <string name="required_username">Username is required</string>
+    <string name="required_name">FullName is required</string>
+    <string name="required_password">Password is required</string>
+    <string name="required_phone">Phone number is required</string>
+    <string name="required_re_password">RePassword is required</string>
     <string name="invalid_password">Password must be >5 characters</string>
+
     <string name="login_failed">"Login failed"</string>
-    <string name="redirect_register">"You don't have a account?"</string>
+    <string name="redirect_register">"Don't you have a account? Register now"</string>
+    <string name="redirect_login">Already have a account? Sign in now</string>
+    <string name="forget_password">Forgot password?</string>
+
 </resources>
