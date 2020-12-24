@@ -14,18 +14,18 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_full_name">Full Name</string>
     <string name="prompt_phone_number">Phone Number</string>
-    <string name="prompt_re_password">RePassword</string>
+    <string name="prompt_re_password">Confirm Password</string>
 
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_up">Sign up</string>
     <string name="action_sign_in_short">Sign In</string>
 
-    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_username">Not a valid Email</string>
     <string name="required_username">Username is required</string>
     <string name="required_name">FullName is required</string>
     <string name="required_password">Password is required</string>
     <string name="required_phone">Phone number is required</string>
-    <string name="required_re_password">RePassword is required</string>
+    <string name="required_re_password">Confirm password is required</string>
     <string name="invalid_password">Password must be >5 characters</string>
 
     <string name="login_failed">"Login failed"</string>

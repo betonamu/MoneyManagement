@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
     EditText mEmail, mPassword;
     Button mBtnLogin;
+    public static boolean btnError = false;
     TextView registerTextLink, forgotTextLink;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
@@ -57,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                finish();
             }
         });
 

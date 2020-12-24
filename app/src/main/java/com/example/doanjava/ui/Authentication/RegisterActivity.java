@@ -3,6 +3,7 @@ package com.example.doanjava.ui.authentication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
-    EditText mEmail, mPassword, mFullName, mPhoneNumber;
+    EditText mEmail, mPassword, mFullName, mPhoneNumber,mRePassword;
     Button mBtnRegister;
     TextView signInTextLink;
     ProgressBar progressBar;
@@ -45,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Anh xa view
         mEmail = (EditText) findViewById(R.id.username);
         mPassword = (EditText) findViewById(R.id.password);
+        mRePassword = (EditText) findViewById(R.id.re_password);
         mBtnRegister = (Button) findViewById(R.id.register);
         mFullName = (EditText) findViewById(R.id.full_name);
         mPhoneNumber = (EditText) findViewById(R.id.phone_number);
@@ -82,6 +84,9 @@ public class RegisterActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(username)) {
             mEmail.setError(getResources().getString(R.string.required_username));
             return;
+        }else if(!isValidEmail(username)){
+            mEmail.setError(getResources().getString(R.string.invalid_username));
+            return;
         }
         if (TextUtils.isEmpty(phoneNumber)) {
             mEmail.setError(getResources().getString(R.string.required_phone));
@@ -95,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
             mPassword.setError(getResources().getString(R.string.invalid_password));
             return;
         }
+
         progressBar.setVisibility(View.VISIBLE);
 
         //Authentication user
@@ -118,12 +124,16 @@ public class RegisterActivity extends AppCompatActivity {
                             .setValue(userModel);
 
                     Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                 } else {
                     Toast.makeText(RegisterActivity.this, "Created with error " + task.getException(), Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(View.GONE);
                 }
             }
         });
+    }
+
+    public static boolean isValidEmail(CharSequence target) {
+        return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 }
