@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1026338468735",
+    "project_id": "doanjava-843c8",
+    "storage_bucket": "doanjava-843c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026338468735:android:a3811d7d192320aaf2a04a",
+        "android_client_info": {
+          "package_name": "com.example.doanjava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026338468735-vrhp6olt8p3ku4nkgkk64ga54vlomg5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA25iMWNBUWipyBZDFG6rhhRO8hGfnjvZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026338468735-vrhp6olt8p3ku4nkgkk64ga54vlomg5t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
