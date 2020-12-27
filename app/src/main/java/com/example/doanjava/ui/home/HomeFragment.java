@@ -11,11 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.doanjava.MainActivity;
 import com.example.doanjava.R;
-import com.example.doanjava.ui.login.LoginActivity;
+import com.example.doanjava.ui.authentication.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeFragment extends Fragment {
-
+    private FirebaseAuth firebaseAuth;
     private HomeViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -28,8 +30,9 @@ public class HomeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                firebaseAuth = FirebaseAuth.getInstance();
+                firebaseAuth.signOut();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
 
