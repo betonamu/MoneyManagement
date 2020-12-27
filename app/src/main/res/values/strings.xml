@@ -2,8 +2,9 @@
     <string name="app_name">Android Project</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_account">Account</string>
     <string name="title_add">Add</string>
+    <string name="title_notification">Notification</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -16,7 +17,7 @@
     <string name="prompt_phone_number">Phone Number</string>
     <string name="prompt_re_password">Confirm Password</string>
 
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in">Sign in</string>
     <string name="action_sign_up">Sign up</string>
     <string name="action_sign_in_short">Sign In</string>
 
@@ -32,5 +33,13 @@
     <string name="redirect_register">"Don't you have a account? Register now"</string>
     <string name="redirect_login">Already have a account? Sign in now</string>
     <string name="forget_password">Forgot password?</string>
+
+
+
+    <string-array name="list_item_account">
+        <item>Thông tin tài khoản</item>
+        <item>Thông báo</item>
+        <item>Đăng xuất</item>
+    </string-array>
 
 </resources>
