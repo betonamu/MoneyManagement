@@ -9,4 +9,11 @@ public class UserModel{
     public UserModel() {
 
     }
+
+    public UserModel(String fullName, String phoneNumber, String email, String password) {
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+    }
 }
