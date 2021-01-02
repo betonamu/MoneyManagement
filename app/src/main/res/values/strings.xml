@@ -34,6 +34,10 @@
     <string name="redirect_login">Already have a account? Sign in now</string>
     <string name="forget_password">Forgot password?</string>
 
+    <string name="surplus">Surplus</string>
+    <string name="prompt_surplus">Surplus</string>
+    <string name="prompt_total">Total</string>
+
 
 
     <string-array name="list_item_account">
