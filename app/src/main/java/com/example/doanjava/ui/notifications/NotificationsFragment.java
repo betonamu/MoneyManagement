@@ -20,8 +20,22 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.doanjava.R;
+import com.example.doanjava.data.model.UserModel;
 import com.example.doanjava.ui.authentication.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 public class NotificationsFragment extends Fragment {
@@ -30,7 +44,11 @@ public class NotificationsFragment extends Fragment {
     private String[] arrItemAccount;
     private ListItemAccountAdapter adapter;
     ListView listView;
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore db;
+    UserModel currentUser;
+
+
 
     class ListItemAccountAdapter extends ArrayAdapter<String> {
         public ListItemAccountAdapter(@NonNull Context context, int resource, int textViewResourceId) {
@@ -64,8 +82,7 @@ public class NotificationsFragment extends Fragment {
                     break;
                 case 2:
                     imageView.setImageResource(R.drawable.logout);
-                    break;
-            }
+             }
             return row;
         }
     }
@@ -80,11 +97,16 @@ public class NotificationsFragment extends Fragment {
         adapter = new ListItemAccountAdapter(getActivity());
         listView.setAdapter(adapter);
 
+        db = FirebaseFirestore.getInstance();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(), "Position: " + position, Toast.LENGTH_SHORT).show();
                 switch (position) {
+                    case 0:
+                        GetInfoAccount();
+                        break;
                     case 2:
                         SignOut();
                         break;
@@ -96,8 +118,13 @@ public class NotificationsFragment extends Fragment {
     }
 
     public void SignOut() {
-        firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signOut();
         startActivity(new Intent(getActivity(), LoginActivity.class));
+    }
+
+    public void GetInfoAccount(){
+        UserModel userModel = new UserModel("A","0981843732","conga@gmail.com","123456");
+        DocumentReference newUserRef = db.collection("Users").document();
+        newUserRef.set(userModel);
     }
 }

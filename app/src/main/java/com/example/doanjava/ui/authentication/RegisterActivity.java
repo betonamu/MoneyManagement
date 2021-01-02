@@ -24,6 +24,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterActivity extends AppCompatActivity {
     EditText mEmail, mPassword, mFullName, mPhoneNumber,mRePassword;
@@ -33,8 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Firebase database
     FirebaseAuth firebaseAuth;
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference ref;
+    FirebaseFirestore db;
 
     private String username, phoneNumber, password, fullName;
 
@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.loading);
         mBtnRegister.setEnabled(true);
         firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,13 +116,9 @@ public class RegisterActivity extends AppCompatActivity {
                     userModel.password = password;
                     userModel.phoneNumber = phoneNumber;
 
-                    //Get a copy of data from firebase
-                    firebaseDatabase = FirebaseDatabase.getInstance();
-                    ref = firebaseDatabase.getReference("Users");
-
                     //Set the value for the node with uId = uId of the current user to firebase
-                    ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(userModel);
+                    db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .set(userModel);
 
                     Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));

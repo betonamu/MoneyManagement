@@ -11,16 +11,19 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.authentication.LoginActivity"
-            android:label="@string/title_activity_login"/>
+            android:label="@string/title_sign_in" />
+
+        <activity
+            android:name=".ui.notifications.InformationUserActivity"
+            android:label="" />
         <activity
             android:name=".ui.authentication.RegisterActivity"
-            android:label="@string/title_activity_login"/>
+            android:label="@string/title_sign_up" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
