@@ -43,6 +43,7 @@
     <string-array name="list_item_account">
         <item>Thông tin tài khoản</item>
         <item>Thông báo</item>
+        <item>Lịch sử</item>
         <item>Đăng xuất</item>
     </string-array>
 

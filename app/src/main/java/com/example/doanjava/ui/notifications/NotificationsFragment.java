@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -46,7 +47,6 @@ public class NotificationsFragment extends Fragment {
     ListView listView;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db;
-    UserModel currentUser;
 
 
 
@@ -78,9 +78,12 @@ public class NotificationsFragment extends Fragment {
                     imageView.setImageResource(R.drawable.user);
                     break;
                 case 1:
-                    imageView.setImageResource(R.drawable.user);
+                    imageView.setImageResource(R.drawable.fashion);
                     break;
                 case 2:
+                    imageView.setImageResource(R.drawable.history);
+                    break;
+                case 3:
                     imageView.setImageResource(R.drawable.logout);
              }
             return row;
@@ -105,9 +108,12 @@ public class NotificationsFragment extends Fragment {
                 Toast.makeText(getActivity(), "Position: " + position, Toast.LENGTH_SHORT).show();
                 switch (position) {
                     case 0:
-                        GetInfoAccount();
+                        startActivity(new Intent(getActivity(),InformationUserActivity.class));
                         break;
                     case 2:
+                        startActivity(new Intent(getActivity(),HistoryActivity.class));
+                        break;
+                    case 3:
                         SignOut();
                         break;
                 }
@@ -122,9 +128,4 @@ public class NotificationsFragment extends Fragment {
         startActivity(new Intent(getActivity(), LoginActivity.class));
     }
 
-    public void GetInfoAccount(){
-        UserModel userModel = new UserModel("A","0981843732","conga@gmail.com","123456");
-        DocumentReference newUserRef = db.collection("Users").document();
-        newUserRef.set(userModel);
-    }
 }

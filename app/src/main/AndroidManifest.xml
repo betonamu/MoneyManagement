@@ -12,13 +12,18 @@
         <activity
             android:name=".ui.authentication.LoginActivity"
             android:label="@string/title_sign_in" />
-
         <activity
             android:name=".ui.notifications.InformationUserActivity"
-            android:label="" />
+            android:label="Information User" />
+
+        <activity
+            android:name=".ui.notifications.HistoryActivity"
+            android:label="History" />
+
         <activity
             android:name=".ui.authentication.RegisterActivity"
             android:label="@string/title_sign_up" />
+
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -31,5 +36,4 @@
             android:name=".MainActivity"
             android:label="@string/app_name" />
     </application>
-
 </manifest>
