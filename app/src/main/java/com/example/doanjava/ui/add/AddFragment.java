@@ -23,17 +23,18 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.doanjava.R;
+import com.example.doanjava.common.GlobalConst;
 import com.example.doanjava.data.model.ExpenseCategoryModel;
 import com.example.doanjava.data.model.ExpenseModel;
+import com.example.doanjava.data.model.UserModel;
 import com.example.doanjava.interfaces.ICallBackFireStore;
-import com.example.doanjava.ui.authentication.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
@@ -47,24 +48,30 @@ import java.util.TimeZone;
 
 public class AddFragment extends Fragment {
 
-    private AddViewModel addViewModel;
-    private FirebaseFirestore db;
+    //initialize controls to binding with view
     private Spinner spinnerMoney;
     private Button btnSave;
     private EditText txtValueMoney, txtDescription, txtCreateAt;
-    private FirebaseAuth firebaseAuth;
     private DatePickerDialog picker;
+
+    //initialize shared variables
     private List<ExpenseCategoryModel> lstExpenseCategory = new ArrayList<>();
     private ExpenseCategoryModel expenseCategoryModel = new ExpenseCategoryModel();
+    private UserModel user;
+    SimpleDateFormat dateFormat = new SimpleDateFormat(GlobalConst.DateMonthYearFormat, Locale.ENGLISH);
+
+    //initialize shared variables
     private String categoryId;
     private int maxId;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
+    private String currentUserId;
 
+    //initialize firebase object
+    private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        addViewModel = new ViewModelProvider(this).get(AddViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add, container, false);
         setHasOptionsMenu(true);
         FirebaseApp.initializeApp(getActivity());
@@ -79,9 +86,10 @@ public class AddFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        currentUserId = firebaseAuth.getCurrentUser().getUid();
 
         //Load data from FireStore to fill in Spinner category
-        db.collection("ExpenseCategories").orderBy("Id").get()
+        db.collection(GlobalConst.ExpenseCategoriesTable).orderBy("Id").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -132,20 +140,6 @@ public class AddFragment extends Fragment {
             }
         });
 
-        //Test query in Firebase FireStore
-//        db.collection("Expense").whereGreaterThan("Id", "1")
-//                .orderBy("Id").get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Log.d("A", document.getId() + " => " + document.getData());
-//                            }
-//                        }
-//                    }
-//                });
-
         return root;
     }
 
@@ -162,13 +156,14 @@ public class AddFragment extends Fragment {
                 @Override
                 public void onCallBack(List<Object> lstObject, Object value) {
                     String userId = firebaseAuth.getCurrentUser().getUid();
-                    Double valueMoney = Double.parseDouble(txtValueMoney.getText().toString());
+                    final Double valueMoney = Double.parseDouble(txtValueMoney.getText().toString());
                     Date dateParse = null;
                     try {
                         dateParse = dateFormat.parse(txtCreateAt.getText().toString());
                     } catch (ParseException e) {
                         Toast.makeText(getActivity(), "The date is not in the correct format", Toast.LENGTH_LONG).show();
                     }
+                    //Make timeStamp from date
                     Timestamp createDate = new Timestamp(dateParse);
                     String description = txtDescription.getText().toString();
                     int maxId = Integer.parseInt(value.toString());
@@ -178,7 +173,9 @@ public class AddFragment extends Fragment {
                     ExpenseModel expense = new ExpenseModel(id, valueMoney, categoryId, description, createDate, userId);
 
                     //Push data to FireStore
-                    db.collection("Expense").document().set(expense);
+                    db.collection(GlobalConst.ExpensesTable).document().set(expense);
+
+                    UpdateBalanceOfCurrentUser(valueMoney);
                 }
             });
         }
@@ -186,7 +183,7 @@ public class AddFragment extends Fragment {
 
     //Get max current id in FireStore
     public void getMaxIdExpense(ICallBackFireStore callBack) {
-        db.collection("Expense").orderBy("Id").get()
+        db.collection(GlobalConst.ExpensesTable).orderBy("Id").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -197,4 +194,39 @@ public class AddFragment extends Fragment {
                     }
                 });
     }
+
+    //check current user has entered balance or not
+    public void GetBalanceOfCurrentUserToUpdate(ICallBackFireStore callBack) {
+        db.collection(GlobalConst.UsersTable).document(currentUserId)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    //Converts response data to UserModel
+                    user = task.getResult().toObject(UserModel.class);
+                }
+                //callback value when load data successfully from firebase
+                callBack.onCallBack(null, user);
+            }
+        });
+    }
+
+    public void UpdateBalanceOfCurrentUser(Double valueMoney){
+        GetBalanceOfCurrentUserToUpdate(new ICallBackFireStore() {
+            @Override
+            public void onCallBack(List lstObject, Object value) {
+                Double balanceOfCurrentUser = ((UserModel)value).balance - valueMoney;
+                db.collection(GlobalConst.UsersTable).document(currentUserId)
+                        .update("balance", balanceOfCurrentUser)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful())
+                                    Toast.makeText(getActivity(), "Save data successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+    }
+
 }

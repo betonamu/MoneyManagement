@@ -10,12 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.doanjava.R;
+import com.example.doanjava.common.GlobalConst;
 import com.example.doanjava.data.model.ExpenseCategoryModel;
 import com.example.doanjava.data.model.ExpenseModel;
 import com.example.doanjava.interfaces.ICallBackFireStore;
@@ -27,7 +29,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,8 +38,9 @@ public class HistoryActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     List<ExpenseModel> lstHistory;
     ListView listViewHistory;
+    TextView tvDataEmpty;
     private ListItemHistoryAdapter adapter;
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+    SimpleDateFormat dateFormat = new SimpleDateFormat(GlobalConst.DateMonthYearFormat, Locale.getDefault());
 
     class ListItemHistoryAdapter extends ArrayAdapter<ExpenseModel> {
         private List<ExpenseModel> _lstItem;
@@ -112,6 +114,7 @@ public class HistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         listViewHistory = (ListView) findViewById(R.id.list_item_history);
+        tvDataEmpty = (TextView) findViewById(R.id.tv_data_empty);
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -119,15 +122,21 @@ public class HistoryActivity extends AppCompatActivity {
         getListHistory(new ICallBackFireStore<ExpenseModel>() {
             @Override
             public void onCallBack(List<ExpenseModel> lstObject, Object value) {
-                adapter = new ListItemHistoryAdapter(lstObject);
-                listViewHistory.setAdapter(adapter);
+                if (lstObject.size() != 0) {
+                    tvDataEmpty.setVisibility(View.GONE);
+                    adapter = new ListItemHistoryAdapter(lstObject);
+                    listViewHistory.setAdapter(adapter);
+                }else{
+                    tvDataEmpty.setText("Chưa có dữ liệu");
+                    tvDataEmpty.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
 
     //Get data from collection "Expense" in FireStore
     public void getListHistory(ICallBackFireStore callBack) {
-        db.collection("Expense")
+        db.collection(GlobalConst.ExpensesTable)
                 .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -142,7 +151,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void getExpenseCategoryName(ICallBackFireStore callBack, String id) {
-        db.collection("ExpenseCategories").whereEqualTo("Id", id)
+        db.collection(GlobalConst.ExpenseCategoriesTable).whereEqualTo("Id", id)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

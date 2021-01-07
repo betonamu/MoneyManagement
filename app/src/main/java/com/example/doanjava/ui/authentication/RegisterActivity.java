@@ -25,9 +25,12 @@ import androidx.core.content.ContextCompat;
 
 import com.example.doanjava.MainActivity;
 import com.example.doanjava.R;
+import com.example.doanjava.common.GlobalConst;
+import com.example.doanjava.common.GlobalFuc;
 import com.example.doanjava.data.model.UserModel;
 import com.example.doanjava.interfaces.ICallBackFireStore;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -48,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView mImageRegister;
     TextView signInTextLink;
     ProgressBar progressBar;
-    int REQUEST_CODE = 1;
+    final int REQUEST_CODE = 1;
     static int PReqCode = 1;
     Uri pickedImgUri;
 
@@ -147,30 +150,30 @@ public class RegisterActivity extends AppCompatActivity {
         password = mPassword.getText().toString().trim();
         phoneNumber = mPhoneNumber.getText().toString().trim();
         fullName = mFullName.getText().toString().trim();
-//
-//        if (TextUtils.isEmpty(fullName)) {
-//            mEmail.setError(getResources().getString(R.string.required_name));
-//            return;
-//        }
-//        if (TextUtils.isEmpty(username)) {
-//            mEmail.setError(getResources().getString(R.string.required_username));
-//            return;
-//        } else if (!isValidEmail(username)) {
-//            mEmail.setError(getResources().getString(R.string.invalid_username));
-//            return;
-//        }
-//        if (TextUtils.isEmpty(phoneNumber)) {
-//            mEmail.setError(getResources().getString(R.string.required_phone));
-//            return;
-//        }
-//        if (TextUtils.isEmpty(password)) {
-//            mPassword.setError(getResources().getString(R.string.required_password));
-//            return;
-//        }
-//        if (password.length() < 6) {
-//            mPassword.setError(getResources().getString(R.string.invalid_password));
-//            return;
-//        }
+
+        if (TextUtils.isEmpty(fullName)) {
+            mEmail.setError(getResources().getString(R.string.required_name));
+            return;
+        }
+        if (TextUtils.isEmpty(username)) {
+            mEmail.setError(getResources().getString(R.string.required_username));
+            return;
+        } else if (!isValidEmail(username)) {
+            mEmail.setError(getResources().getString(R.string.invalid_username));
+            return;
+        }
+        if (TextUtils.isEmpty(phoneNumber)) {
+            mEmail.setError(getResources().getString(R.string.required_phone));
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            mPassword.setError(getResources().getString(R.string.required_password));
+            return;
+        }
+        if (password.length() < 6) {
+            mPassword.setError(getResources().getString(R.string.invalid_password));
+            return;
+        }
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -185,12 +188,15 @@ public class RegisterActivity extends AppCompatActivity {
                             UserModel userModel = new UserModel();
                             userModel.email = username;
                             userModel.fullName = fullName;
-                            userModel.password = password;
+                            userModel.password = GlobalFuc.md5(password);
                             userModel.phoneNumber = phoneNumber;
-                            userModel.photoUrl = value.toString();
+                            userModel.photoUrl = null;
+                            if (value != null) {
+                                userModel.photoUrl = value.toString();
+                            }
 
                             //Set the value for the node with uId = uId of the current user to firebase
-                            db.collection("Users").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            db.collection(GlobalConst.UsersTable).document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .set(userModel);
 
                             Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_LONG).show();
@@ -214,20 +220,21 @@ public class RegisterActivity extends AppCompatActivity {
     public void uploadPhoto(ICallBackFireStore callBack) {
         if (pickedImgUri != null) {
             Calendar calendar = Calendar.getInstance();
-            StorageReference mountainsRef = storage.getReferenceFromUrl("gs://doanjava-843c8.appspot.com").child("image" + calendar.getTimeInMillis());
+            StorageReference mountainsRef = storage.getReferenceFromUrl(GlobalConst.UrlUploadFileStorage).child("image" + calendar.getTimeInMillis());
             mountainsRef.putFile(pickedImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                           Uri downloadUri = uri;
-                            callBack.onCallBack(null,downloadUri);
-                            Log.d("A",downloadUri.toString());
+                            Uri downloadUri = uri;
+                            callBack.onCallBack(null, downloadUri);
                         }
                     });
                 }
             });
+        }else{
+            callBack.onCallBack(null,null);
         }
     }
 }
