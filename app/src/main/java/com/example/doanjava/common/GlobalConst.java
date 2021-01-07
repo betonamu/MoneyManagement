@@ -11,5 +11,5 @@ public class GlobalConst {
     //Url to upload file in Firebase FireStorage
     public final static String UrlUploadFileStorage = "gs://doanjava-843c8.appspot.com";
 
-    public final static String DateMonthYearFormat = "yyyy/MM/dd";
+    public final static String DateMonthYearFormat = "dd/MM/yyyy";
 }
