@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.doanjava.R;
 import com.example.doanjava.common.GlobalConst;
+import com.example.doanjava.common.GlobalFuc;
 import com.example.doanjava.data.model.ExpenseCategoryModel;
 import com.example.doanjava.data.model.ExpenseModel;
 import com.example.doanjava.data.model.UserModel;
@@ -155,7 +157,16 @@ public class AddFragment extends Fragment {
             getMaxIdExpense(new ICallBackFireStore<Object>() {
                 @Override
                 public void onCallBack(List<Object> lstObject, Object value) {
-                    String userId = firebaseAuth.getCurrentUser().getUid();
+                    //validate user input
+                    if (TextUtils.isEmpty(txtValueMoney.getText().toString().trim())) {
+                        txtValueMoney.setError("Input money is required!");
+                        return;
+                    }
+                    if (TextUtils.isEmpty(txtCreateAt.getText().toString().trim())) {
+                        txtValueMoney.setError("Date is required!");
+                        return;
+                    }
+
                     final Double valueMoney = Double.parseDouble(txtValueMoney.getText().toString());
                     Date dateParse = null;
                     try {
@@ -170,16 +181,14 @@ public class AddFragment extends Fragment {
                     String id = (maxId + 1) + "";
 
                     //Add data to model Expense
-                    ExpenseModel expense = new ExpenseModel(id, valueMoney, categoryId, description, createDate, userId);
+                    ExpenseModel expense = new ExpenseModel(id, valueMoney, categoryId, description, createDate, currentUserId);
 
-                    //Push data to FireStore
-                    db.collection(GlobalConst.ExpensesTable).document().set(expense);
-
-                    UpdateBalanceOfCurrentUser(valueMoney);
+                    UpdateBalanceOfCurrentUser(valueMoney, expense);
                 }
             });
         }
     };
+
 
     //Get max current id in FireStore
     public void getMaxIdExpense(ICallBackFireStore callBack) {
@@ -211,20 +220,34 @@ public class AddFragment extends Fragment {
         });
     }
 
-    public void UpdateBalanceOfCurrentUser(Double valueMoney){
+    public void UpdateBalanceOfCurrentUser(Double valueMoney, ExpenseModel expense) {
         GetBalanceOfCurrentUserToUpdate(new ICallBackFireStore() {
             @Override
             public void onCallBack(List lstObject, Object value) {
-                Double balanceOfCurrentUser = ((UserModel)value).balance - valueMoney;
-                db.collection(GlobalConst.UsersTable).document(currentUserId)
-                        .update("balance", balanceOfCurrentUser)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful())
-                                    Toast.makeText(getActivity(), "Save data successfully", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                if (((UserModel) value).balance == null) {
+                    ((UserModel) value).balance = 0.0;
+                }
+                Double balanceOfCurrentUser = ((UserModel) value).balance - valueMoney;
+                if (balanceOfCurrentUser < valueMoney) {
+                    GlobalFuc.DialogShowMessage(getActivity(), GlobalConst.AppTitle, "Your balance not enough!");
+                } else
+                    db.collection(GlobalConst.UsersTable).document(currentUserId)
+                            .update("balance", balanceOfCurrentUser)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        //Push data to FireStore
+                                        db.collection(GlobalConst.ExpensesTable).document().set(expense);
+                                        Toast.makeText(getActivity(), "Save data successfully", Toast.LENGTH_SHORT).show();
+
+                                        //set empty for EditTexts after save
+                                        txtValueMoney.setText("");
+                                        txtCreateAt.setText("");
+                                        txtDescription.setText("");
+                                    }
+                                }
+                            });
             }
         });
     }
