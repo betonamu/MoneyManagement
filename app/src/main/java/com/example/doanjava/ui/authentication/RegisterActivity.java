@@ -200,7 +200,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     .set(userModel);
 
                             Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                         } else {
                             Toast.makeText(RegisterActivity.this, "Created with error " + task.getException(), Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);

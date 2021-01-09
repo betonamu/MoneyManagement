@@ -160,17 +160,22 @@ public class NotificationsFragment extends Fragment {
         GetUserInformation(new ICallBackFireStore<UserModel>() {
             @Override
             public void onCallBack(List<UserModel> lstObject, Object value) {
-                if (lstObject.size() != 0 && lstObject.get(0).photoUrl != null) {
+                if (lstObject.size() != 0) {
                     tvFullName.setText(lstObject.get(0).fullName);
-                    String balance = GlobalFuc.CurrencyFormat(lstObject.get(0).balance);
-
+                    String balance;
+                    if(lstObject.get(0).balance != null)
+                        balance  = GlobalFuc.CurrencyFormat(lstObject.get(0).balance);
+                    else
+                        balance = "0";
                     tvBalance.setText("Số dư: " + balance + " VND");
-                    Uri photoUri = Uri.parse(lstObject.get(0).photoUrl);
-                    //set image from Uri into view
-                    Glide.with(root)
-                            .load(photoUri)
-                            .apply(RequestOptions.circleCropTransform())
-                            .into(imgAccount);
+                    if (lstObject.get(0).photoUrl != null) {
+                        Uri photoUri = Uri.parse(lstObject.get(0).photoUrl);
+                        //set image from Uri into view
+                        Glide.with(root)
+                                .load(photoUri)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(imgAccount);
+                    }
                 }
             }
         });

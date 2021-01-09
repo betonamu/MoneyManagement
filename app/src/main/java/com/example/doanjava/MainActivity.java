@@ -1,6 +1,9 @@
 package com.example.doanjava;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 import com.example.doanjava.common.GlobalConst;
 import com.example.doanjava.data.model.UserModel;
 import com.example.doanjava.interfaces.ICallBackFireStore;
+import com.example.doanjava.receivers.NotificationReceiver;
 import com.example.doanjava.ui.authentication.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,6 +35,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SetDailyNotification();
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -119,6 +127,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    //Set time to wake up device to create daily notification
+    public void SetDailyNotification() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, GlobalConst.HourWakeUpDailyNotification);
+        calendar.set(Calendar.MINUTE, GlobalConst.MinuteWakeUpDailyNotification);
+        calendar.set(Calendar.SECOND, GlobalConst.SecondsWakeUpDailyNotification);
+
+        if (calendar.getTime().compareTo(new Date()) < 0)
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+        //Khởi chạy dịch vụ để tạo thông báo
+        Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        //Đánh thức thiết bị hằng ngày vào thời gian đã gán ở calendar
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        }
     }
 
 }

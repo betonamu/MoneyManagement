@@ -1,5 +1,21 @@
 package com.example.doanjava.common;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.text.TextUtils;
+import android.view.Gravity;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+
+import com.example.doanjava.R;
+import com.example.doanjava.ui.authentication.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
@@ -37,6 +53,19 @@ public class GlobalFuc {
         NumberFormat formatter = new DecimalFormat("#,###");
         String formattedCurrency = formatter.format(value);
         return formattedCurrency;
+    }
+
+    public static void DialogShowMessage(Activity activity, String title, String mess) {
+        AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(activity);
+        passwordResetDialog.setTitle(title);
+        passwordResetDialog.setMessage(mess);
+
+        passwordResetDialog.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        passwordResetDialog.create().show();
     }
 
 }
