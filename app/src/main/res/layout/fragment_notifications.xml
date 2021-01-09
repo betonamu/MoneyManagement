@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_fullName_account_fragment"></TextView>
 
     <View
-        android:id="@+id/hr"
+        android:id="@+id/hr_notification_fragment"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="10dp"
@@ -60,6 +60,6 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hr" />
+        app:layout_constraintTop_toBottomOf="@+id/hr_notification_fragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

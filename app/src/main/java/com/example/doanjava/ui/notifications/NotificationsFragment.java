@@ -117,7 +117,12 @@ public class NotificationsFragment extends Fragment {
                     imageView.setImageResource(R.drawable.history);
                     break;
                 case 3:
+                    imageView.setImageResource(R.drawable.information);
+                    break;
+                case 4:
                     imageView.setImageResource(R.drawable.logout);
+                    break;
+
             }
             return row;
         }
@@ -151,6 +156,9 @@ public class NotificationsFragment extends Fragment {
                         startActivity(new Intent(getActivity(), HistoryActivity.class));
                         break;
                     case 3:
+                        startActivity(new Intent(getActivity(),AboutUsActivity.class));
+                        break;
+                    case 4:
                         SignOut();
                         break;
                 }

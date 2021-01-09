@@ -21,4 +21,7 @@ public class GlobalConst {
     public final static int MinuteWakeUpDailyNotification = 0;
     public final static int SecondsWakeUpDailyNotification = 0;
 
+    public final static String AppVersion = "1.0";
+    public final static String CreateBy = "Nhóm BBB Đại Học HUTECH";
+
 }
