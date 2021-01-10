@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.doanjava.R;
 import com.example.doanjava.common.GlobalConst;
+import com.example.doanjava.common.GlobalFuc;
 import com.example.doanjava.data.model.ExpenseCategoryModel;
 import com.example.doanjava.data.model.ExpenseModel;
 import com.example.doanjava.interfaces.ICallBackFireStore;
@@ -61,7 +62,7 @@ public class HistoryActivity extends AppCompatActivity {
             View row = inflater.inflate(R.layout.layout_list_item_history, null);
 
             ExpenseModel item = _lstItem.get(position);
-            Double value = item.Value;
+            String valueMoney = GlobalFuc.CurrencyFormat(item.Value);
             String description = item.Description;
             String createAt = dateFormat.format(item.CreateAt.toDate());
             String categoryId = item.CategoryId;
@@ -75,7 +76,7 @@ public class HistoryActivity extends AppCompatActivity {
 
             //((TextView) row.findViewById(R.id.txt_id)).setText(categoryId);
             ((TextView) row.findViewById(R.id.txt_create_at_history)).setText(createAt);
-            ((TextView) row.findViewById(R.id.txt_value_history)).setText(value + "");
+            ((TextView) row.findViewById(R.id.txt_value_history)).setText(valueMoney + " VND");
 
             switch (item.CategoryId) {
                 case "1":

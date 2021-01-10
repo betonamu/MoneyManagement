@@ -6,10 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,7 +34,7 @@ import java.util.List;
 public class AboutUsActivity extends AppCompatActivity {
     ImageView imgApp;
     TextView tvVersion,tvCreateBy;
-    List<String> lstItemContact;
+    String[] arrItemContact;
     ListView lsvContact;
     ListItemContactAdapter adapter;
 
@@ -39,7 +44,7 @@ public class AboutUsActivity extends AppCompatActivity {
         }
 
         public ListItemContactAdapter(Activity activity) {
-            super(activity, android.R.layout.simple_list_item_1, lstItemContact);
+            super(activity, android.R.layout.simple_list_item_1, arrItemContact);
         }
 
         @NonNull
@@ -50,7 +55,7 @@ public class AboutUsActivity extends AppCompatActivity {
                 LayoutInflater inflater = getLayoutInflater();
                 row = inflater.inflate(R.layout.layout_list_item_contact, null);
             }
-            String title = lstItemContact.get(position);
+            String title = arrItemContact[position];
             ((TextView) row.findViewById(R.id.title_contact)).setText(title);
 
             //set image for list item
@@ -61,7 +66,7 @@ public class AboutUsActivity extends AppCompatActivity {
                     imageView.setImageResource(R.drawable.facebook);
                     break;
                 case 1:
-                    imageView.setImageResource(R.drawable.facebook);
+                    imageView.setImageResource(R.drawable.gmail);
                     break;
                 case 2:
                     imageView.setImageResource(R.drawable.facebook);
@@ -88,13 +93,39 @@ public class AboutUsActivity extends AppCompatActivity {
                 .into(imgApp);
         tvVersion.setText(GlobalConst.AppVersion);
         tvCreateBy.setText(GlobalConst.CreateBy);
-        lstItemContact = new LinkedList<>();
-        lstItemContact.add("Lien He qua Fb");
-        lstItemContact.add("Lien he qua youtube");
-        lstItemContact.add("Lien he qua tweet");
+        arrItemContact = getResources().getStringArray(R.array.list_item_contact);
 
         adapter = new ListItemContactAdapter(this);
         lsvContact.setAdapter(adapter);
 
+        lsvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position){
+                    case 0:
+                        LaunchFacebook();
+                        break;
+                }
+            }
+        });
+
+    }
+
+    public final void LaunchFacebook() {
+        final String urlFb = "fb://profile/" + GlobalConst.PageIdFacebook;
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(urlFb));
+
+        // If a Facebook app is installed, use it. Otherwise, launch
+        // a browser
+        final PackageManager packageManager = getPackageManager();
+        List<ResolveInfo> list =
+                packageManager.queryIntentActivities(intent,
+                        PackageManager.MATCH_DEFAULT_ONLY);
+        if (list.size() == 0) {
+            final String urlBrowser = "https://www.facebook.com/" + GlobalConst.PageIdFacebook;
+            intent.setData(Uri.parse(urlBrowser));
+        }
+        startActivity(intent);
     }
 }

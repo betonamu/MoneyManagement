@@ -166,8 +166,11 @@ public class AddFragment extends Fragment {
                         txtValueMoney.setError("Date is required!");
                         return;
                     }
+                    String[] splitBalance = txtValueMoney.getText().toString().split(" ");
 
-                    final Double valueMoney = Double.parseDouble(txtValueMoney.getText().toString());
+                    /*input value have "," character
+                    need remove "," character to parse double*/
+                    final Double valueMoney = Double.parseDouble(splitBalance[1].replace(",",""));
                     Date dateParse = null;
                     try {
                         dateParse = dateFormat.parse(txtCreateAt.getText().toString());

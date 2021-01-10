@@ -37,6 +37,7 @@
     <string name="redirect_register">"Don't you have a account? Register now"</string>
     <string name="redirect_login">Already have a account? Sign in now</string>
     <string name="forget_password">Forgot password?</string>
+    <string name="save">Save</string>
 
 
     <string-array name="list_item_account">
@@ -45,6 +46,12 @@
         <item>Lịch sử</item>
         <item>Giới thiệu</item>
         <item>Đăng xuất</item>
+    </string-array>
+
+    <string-array name="list_item_contact">
+        <item>Liên hệ với chúng tôi qua facebook</item>
+        <item>Liên hệ với chúng tôi qua email</item>
+        <item>Lịch sử</item>
     </string-array>
 
 </resources>
