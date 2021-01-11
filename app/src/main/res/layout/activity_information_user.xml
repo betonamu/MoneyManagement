@@ -64,5 +64,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hr"></Button>
+    <Button
+        android:id="@+id/btn_update_balance_user_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="CAP NHAT SO DU"
+        android:textSize="16sp"
+        android:background="@drawable/button_style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_change_password_user_activity"></Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

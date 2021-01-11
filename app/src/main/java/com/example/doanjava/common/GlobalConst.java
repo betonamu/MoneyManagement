@@ -24,4 +24,7 @@ public class GlobalConst {
     public final static String AppVersion = "1.0";
     public final static String CreateBy = "Nhóm BBB Đại Học HUTECH";
 
+    public final static String PageIdFacebook = "100008727483897";
+
+    public final static String prefix = "VND ";
 }

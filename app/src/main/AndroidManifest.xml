@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.notifications.AboutUsActivity"></activity>
+        <activity android:name=".ui.notifications.UpdateBalanceActivity"
+            android:label="Update Balance"></activity>
+        <activity android:name=".ui.notifications.AboutUsActivity" />
         <activity
             android:name=".ui.notifications.ChangePasswordActivity"
             android:label="Change Password" />

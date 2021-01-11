@@ -13,7 +13,7 @@ import com.example.doanjava.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class InformationUserActivity extends AppCompatActivity {
-    Button btnChangePassword;
+    Button btnChangePassword,btnUpdateBalance;
 
     private FirebaseAuth firebaseAuth;
 
@@ -24,10 +24,19 @@ public class InformationUserActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btnChangePassword = (Button) findViewById(R.id.btn_change_password_user_activity);
+        btnUpdateBalance = (Button) findViewById(R.id.btn_update_balance_user_activity);
+
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(InformationUserActivity.this,ChangePasswordActivity.class));
+            }
+        });
+
+        btnUpdateBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(InformationUserActivity.this,UpdateBalanceActivity.class));
             }
         });
     }
