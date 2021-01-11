@@ -37,17 +37,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="80dp"
-        android:textSize="40dp"
-        android:gravity="center"
-        android:textColorHint="@color/red"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/prompt_advertisement"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvSurplus"/>
+<!--    <TextView-->
+<!--        android:id="@+id/advertisement"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="200dp"-->
+<!--        android:layout_marginTop="80dp"-->
+<!--        android:textSize="40dp"-->
+<!--        android:gravity="center"-->
+<!--        android:textColorHint="@color/red"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:hint="@string/prompt_advertisement"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/tvSurplus"/>-->
 
 
 
