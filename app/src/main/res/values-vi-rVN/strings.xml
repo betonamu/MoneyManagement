@@ -46,4 +46,7 @@
     <string name="enter_money">Nhập số tiền</string>
     <string name="update_balance_successfully">Cập nhật số dư thành công</string>
     <string name="item_setting">Cài đặt</string>
+    <string name="surplus">Số dư</string>
+    <string name="prompt_surplus">Số dư</string>
+    <string name="prompt_total">Tổng ví</string>
 </resources>

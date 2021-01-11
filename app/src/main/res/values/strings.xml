@@ -48,21 +48,16 @@
     <string name="enter_money">Enter Money</string>
     <string name="update_balance_successfully">Update balance successfully</string>
 
-<<<<<<< HEAD
     <string name="surplus">Surplus</string>
     <string name="prompt_surplus">Surplus</string>
     <string name="prompt_total">Total</string>
-    <string name="prompt_advertisement">LIÊN HỆ QUẢNG CÁO: 0908999805</string>
 
-
-=======
     <string name="item_account_information">Account Information</string>
     <string name="item_history">History</string>
     <string name="item_about_us">About Us</string>
     <string name="item_sign_out">Sign Out</string>
     <string name="item_notification">Notification</string>
     <string name="item_setting">Setting</string>
->>>>>>> dev
 
     <string-array name="list_item_account">
         <item>@string/item_account_information</item>
