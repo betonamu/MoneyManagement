@@ -25,6 +25,9 @@ public class GlobalConst {
     public final static String CreateBy = "Nhóm BBB Đại Học HUTECH";
 
     public final static String PageIdFacebook = "100008727483897";
+    public final static String UrlBrowserFacebook = "https://www.facebook.com/";
+    public final static String UrlFacebook = "fb://profile/";
+
 
     public final static String prefix = "VND ";
 }

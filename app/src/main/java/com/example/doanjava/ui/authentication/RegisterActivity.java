@@ -23,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.doanjava.MainActivity;
 import com.example.doanjava.R;
 import com.example.doanjava.common.GlobalConst;
@@ -122,7 +124,8 @@ public class RegisterActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(RegisterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                Toast.makeText(RegisterActivity.this, "Please accept for required permission", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, getResources().getString(R.string.msg_request_permission),
+                        Toast.LENGTH_SHORT).show();
             } else {
                 ActivityCompat.requestPermissions(RegisterActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -141,7 +144,10 @@ public class RegisterActivity extends AppCompatActivity {
             // the user has successfully picked an image
             // we need to save its reference to a Uri variable
             pickedImgUri = data.getData();
-            mImageRegister.setImageURI(pickedImgUri);
+            Glide.with(this)
+                    .load(pickedImgUri)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(mImageRegister);
         }
     }
 
@@ -199,10 +205,12 @@ public class RegisterActivity extends AppCompatActivity {
                             db.collection(GlobalConst.UsersTable).document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .set(userModel);
 
-                            Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.create_account_successfully),
+                                    Toast.LENGTH_LONG).show();
                             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Created with error " + task.getException(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, getResources().getString(R.string.create_account_failed) + task.getException(),
+                                    Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }
