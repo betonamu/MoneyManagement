@@ -122,7 +122,6 @@ public class NotificationsFragment extends Fragment {
                 case 4:
                     imageView.setImageResource(R.drawable.logout);
                     break;
-
             }
             return row;
         }
@@ -152,13 +151,17 @@ public class NotificationsFragment extends Fragment {
                     case 0:
                         startActivity(new Intent(getActivity(), InformationUserActivity.class));
                         break;
+                    case 1:
+                        break;
                     case 2:
-                        startActivity(new Intent(getActivity(), HistoryActivity.class));
                         break;
                     case 3:
-                        startActivity(new Intent(getActivity(),AboutUsActivity.class));
+                        startActivity(new Intent(getActivity(), HistoryActivity.class));
                         break;
                     case 4:
+                        startActivity(new Intent(getActivity(),AboutUsActivity.class));
+                        break;
+                    case 5:
                         SignOut();
                         break;
                 }

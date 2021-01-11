@@ -7,11 +7,10 @@
     <string name="title_notification">Notification</string>
     <string name="title_user">User</string>
     <string name="title_sign_in">Login</string>
-    <string name="title_sign_up">Register11111</string>
+    <string name="title_sign_up">Register</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcome">"Welcome !"</string>
     <string name="title_activity_login">LoginActivity</string>
 
@@ -38,14 +37,31 @@
     <string name="redirect_login">Already have a account? Sign in now</string>
     <string name="forget_password">Forgot password?</string>
     <string name="save">Save</string>
+    <string name="create_account_failed">Created with error</string>
+    <string name="create_account_successfully">User Created.</string>
+    <string name="msg_request_permission">Please accept for required permission.</string>
+    <string name="close">Close</string>
+    <string name="change_password">Change Password</string>
+    <string name="update_balance">Update Balance</string>
+    <string name="enter_date">Enter date</string>
+    <string name="enter_description">Enter date</string>
+    <string name="enter_money">Enter Money</string>
+    <string name="update_balance_successfully">Update balance successfully</string>
 
+    <string name="item_account_information">Account Information</string>
+    <string name="item_history">History</string>
+    <string name="item_about_us">About Us</string>
+    <string name="item_sign_out">Sign Out</string>
+    <string name="item_notification">Notification</string>
+    <string name="item_setting">Setting</string>
 
     <string-array name="list_item_account">
-        <item>Thông tin tài khoản</item>
-        <item>Thông báo</item>
-        <item>Lịch sử</item>
-        <item>Giới thiệu</item>
-        <item>Đăng xuất</item>
+        <item>@string/item_account_information</item>
+        <item>@string/item_setting</item>
+        <item>@string/item_notification</item>
+        <item>@string/item_history</item>
+        <item>@string/item_about_us</item>
+        <item>@string/item_sign_out</item>
     </string-array>
 
     <string-array name="list_item_contact">
