@@ -8,18 +8,19 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/surplus"
+        android:id="@+id/tvSurplus"
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/edit_text_style"
         android:hint="@string/prompt_surplus"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/label" />
 
@@ -28,12 +29,26 @@
         android:layout_width="94dp"
         android:layout_height="21dp"
         android:layout_marginTop="24dp"
-        android:textSize="17dp"
+        android:textSize="20dp"
         android:gravity="center"
         android:hint="@string/prompt_total"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="80dp"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:textColorHint="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/prompt_advertisement"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSurplus"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

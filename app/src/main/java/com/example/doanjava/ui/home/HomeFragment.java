@@ -1,48 +1,68 @@
 package com.example.doanjava.ui.home;
 
-import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.doanjava.MainActivity;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.doanjava.R;
-import com.example.doanjava.ui.authentication.LoginActivity;
+import com.example.doanjava.common.GlobalConst;
+import com.example.doanjava.common.GlobalFuc;
+import com.example.doanjava.data.model.UserModel;
+import com.example.doanjava.interfaces.ICallBackFireStore;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private HomeViewModel homeViewModel;
+    private List<UserModel> lstUser = new LinkedList<>();
+    private TextView tvSurplus;
+
+    private FirebaseFirestore db;
+    FirebaseStorage storage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-<<<<<<< HEAD
+        tvSurplus = (TextView) root.findViewById(R.id.tvSurplus);
 
-=======
-        setHasOptionsMenu(true);
-        Button button = root.findViewById(R.id.btn_login);
-        button.setOnClickListener(new View.OnClickListener() {
+        storage = FirebaseStorage.getInstance();
+        db = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        GetUserInformation(new ICallBackFireStore<UserModel>() {
             @Override
-            public void onClick(View v) {
-                firebaseAuth = FirebaseAuth.getInstance();
-                firebaseAuth.signOut();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
+            public void onCallBack(List<UserModel> lstObject, Object value) {
+                if (lstObject.size() != 0) {
+                    String balance;
+                    if(lstObject.get(0).balance != null)
+                        balance  = GlobalFuc.CurrencyFormat(lstObject.get(0).balance);
+                    else
+                        balance = "0";
+                    tvSurplus.setText(balance + " VND");
+                }
             }
         });
->>>>>>> dev
-
-
         return root;
     }
 
@@ -51,4 +71,23 @@ public class HomeFragment extends Fragment {
         inflater.inflate(R.menu.menu_fragment_home,menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+
+
+    public void GetUserInformation(ICallBackFireStore callBack) {
+        db.collection(GlobalConst.UsersTable).document(firebaseAuth.getCurrentUser().getUid())
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    UserModel userModel = task.getResult().toObject(UserModel.class);
+                    if (userModel != null) {
+                        lstUser.add(userModel);
+                    }
+                }
+                callBack.onCallBack(lstUser, null);
+            }
+        });
+    }
+
 }
