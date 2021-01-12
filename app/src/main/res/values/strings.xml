@@ -11,7 +11,7 @@
 
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome ! "</string>
     <string name="title_activity_login">LoginActivity</string>
 
     <string name="prompt_email">Email</string>
@@ -51,6 +51,7 @@
     <string name="surplus">Surplus</string>
     <string name="prompt_surplus">Surplus</string>
     <string name="prompt_total">Total</string>
+    <string name="prompt_spend">Spend</string>
 
     <string name="item_account_information">Account Information</string>
     <string name="item_history">History</string>
