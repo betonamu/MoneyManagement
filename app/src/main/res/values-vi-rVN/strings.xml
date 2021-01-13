@@ -46,14 +46,14 @@
     <string name="enter_money">Nhập số tiền</string>
     <string name="update_balance_successfully">Cập nhật số dư thành công</string>
     <string name="item_setting">Cài đặt</string>
-<<<<<<< HEAD
+
     <string name="surplus">Số dư</string>
     <string name="prompt_surplus">Số dư</string>
     <string name="prompt_total">Tổng ví</string>
-=======
+
     <string name="item_language_english">Tiếng Anh</string>
     <string name="item_language_vietnamese">Tiếng Việt</string>
     <string name="language">Ngôn ngữ</string>
     <string name="prompt_spend">Chi tiêu</string>
-    >>>>>>> dev
+
 </resources>
