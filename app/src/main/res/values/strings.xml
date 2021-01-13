@@ -47,6 +47,7 @@
     <string name="enter_description">Enter date</string>
     <string name="enter_money">Enter Money</string>
     <string name="update_balance_successfully">Update balance successfully</string>
+    <string name="language">Language</string>
 
     <string name="item_account_information">Account Information</string>
     <string name="item_history">History</string>
@@ -54,6 +55,8 @@
     <string name="item_sign_out">Sign Out</string>
     <string name="item_notification">Notification</string>
     <string name="item_setting">Setting</string>
+    <string name="item_language_vietnamese">Vietnamese</string>
+    <string name="item_language_english">English</string>
 
     <string-array name="list_item_account">
         <item>@string/item_account_information</item>
@@ -68,6 +71,11 @@
         <item>Liên hệ với chúng tôi qua facebook</item>
         <item>Liên hệ với chúng tôi qua email</item>
         <item>Lịch sử</item>
+    </string-array>
+
+    <string-array name="list_item_language">
+        <item>@string/item_language_vietnamese</item>
+        <item>@string/item_language_english</item>
     </string-array>
 
 </resources>

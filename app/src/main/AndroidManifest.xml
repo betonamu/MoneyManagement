@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.doanjava">
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,21 +11,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.notifications.UpdateBalanceActivity"
-            android:label="Update Balance"></activity>
-        <activity android:name=".ui.notifications.AboutUsActivity" />
+        <activity
+            android:name=".ui.notifications.SettingActivity"
+            android:label="Setting Activity"></activity>
+        <activity
+            android:name=".ui.notifications.UpdateBalanceActivity"
+            android:label="@string/update_balance" />
+        <activity
+            android:name=".ui.notifications.AboutUsActivity"
+            android:label="@string/item_about_us" />
         <activity
             android:name=".ui.notifications.ChangePasswordActivity"
-            android:label="Change Password" />
+            android:label="@string/change_password" />
         <activity
             android:name=".ui.authentication.LoginActivity"
             android:label="@string/title_sign_in" />
         <activity
             android:name=".ui.notifications.InformationUserActivity"
-            android:label="Information User" />
+            android:label="@string/item_account_information" />
         <activity
             android:name=".ui.notifications.HistoryActivity"
-            android:label="History" />
+            android:label="@string/item_history" />
         <activity
             android:name=".ui.authentication.RegisterActivity"
             android:label="@string/title_sign_up" />
@@ -42,7 +47,6 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
-
         <receiver android:name=".receivers.NotificationReceiver" />
     </application>
 
