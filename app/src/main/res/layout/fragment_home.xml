@@ -58,7 +58,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/edit_text_style"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvSpend">
 
@@ -66,14 +66,82 @@
             android:id="@+id/Ibtn1"
             android:layout_width="65dp"
             android:layout_height="65dp"
+            android:layout_marginTop="4dp"
             android:background="@drawable/edit_text_style"
             android:src="@drawable/food"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.023"
+            app:layout_constraintBottom_toTopOf="@+id/tv1"
+            app:layout_constraintEnd_toStartOf="@id/Ibtn2"
+            app:layout_constraintHorizontal_bias="0.071"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.036" />
+            app:layout_constraintVertical_bias="0.024" />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="112dp"
+            android:gravity="center"
+            android:hint="@string/prompt_food"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv2"
+            app:layout_constraintHorizontal_bias="0.071"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/Ibtn2"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/edit_text_style"
+            android:src="@drawable/living"
+            app:layout_constraintBottom_toTopOf="@+id/tv2"
+            app:layout_constraintEnd_toStartOf="@+id/Ibtn3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="112dp"
+            android:gravity="center"
+            android:hint="@string/prompt_living"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv3" />
+
+        <ImageButton
+            android:id="@+id/Ibtn3"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:background="@drawable/edit_text_style"
+            android:src="@drawable/car"
+            app:layout_constraintBottom_toTopOf="@+id/tv3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="112dp"
+            android:gravity="center"
+            android:hint="@string/prompt_car"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

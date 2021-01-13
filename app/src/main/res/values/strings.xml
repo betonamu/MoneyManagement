@@ -53,6 +53,10 @@
     <string name="prompt_surplus">Surplus</string>
     <string name="prompt_total">Total</string>
     <string name="prompt_spend">Spend</string>
+    <string name="prompt_food">Food</string>
+    <string name="prompt_living">Living</string>
+    <string name="prompt_car">Car</string>
+    <string name="prompt_boy">Boy</string>
 
     <string name="item_account_information">Account Information</string>
     <string name="item_history">History</string>
