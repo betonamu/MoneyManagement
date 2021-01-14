@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
@@ -111,23 +112,31 @@ public class NotificationsFragment extends Fragment {
                     imageView.setImageResource(R.drawable.user);
                     break;
                 case 1:
-                    imageView.setImageResource(R.drawable.fashion);
+                    imageView.setImageResource(R.drawable.settings);
                     break;
                 case 2:
                     imageView.setImageResource(R.drawable.history);
                     break;
                 case 3:
-                    imageView.setImageResource(R.drawable.information);
+                    imageView.setImageResource(R.drawable.ic_notifications_black_24dp);
                     break;
                 case 4:
+                    imageView.setImageResource(R.drawable.information);
+                    break;
+                case 5:
                     imageView.setImageResource(R.drawable.logout);
                     break;
-
             }
             return row;
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
@@ -152,13 +161,18 @@ public class NotificationsFragment extends Fragment {
                     case 0:
                         startActivity(new Intent(getActivity(), InformationUserActivity.class));
                         break;
+                    case 1:
+                        startActivity(new Intent(getActivity(), SettingActivity.class));
+                        break;
                     case 2:
-                        startActivity(new Intent(getActivity(), HistoryActivity.class));
                         break;
                     case 3:
-                        startActivity(new Intent(getActivity(),AboutUsActivity.class));
+                        startActivity(new Intent(getActivity(), HistoryActivity.class));
                         break;
                     case 4:
+                        startActivity(new Intent(getActivity(),AboutUsActivity.class));
+                        break;
+                    case 5:
                         SignOut();
                         break;
                 }

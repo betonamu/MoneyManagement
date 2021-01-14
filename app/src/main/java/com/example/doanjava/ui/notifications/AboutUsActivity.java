@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -81,6 +82,7 @@ public class AboutUsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imgApp = (ImageView) findViewById(R.id.img_app);
         tvVersion = (TextView) findViewById(R.id.tv_version);
@@ -112,7 +114,7 @@ public class AboutUsActivity extends AppCompatActivity {
     }
 
     public final void LaunchFacebook() {
-        final String urlFb = "fb://profile/" + GlobalConst.PageIdFacebook;
+        final String urlFb = GlobalConst.UrlFacebook + GlobalConst.PageIdFacebook;
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(urlFb));
 
@@ -123,9 +125,26 @@ public class AboutUsActivity extends AppCompatActivity {
                 packageManager.queryIntentActivities(intent,
                         PackageManager.MATCH_DEFAULT_ONLY);
         if (list.size() == 0) {
-            final String urlBrowser = "https://www.facebook.com/" + GlobalConst.PageIdFacebook;
+            final String urlBrowser = GlobalConst.UrlBrowserFacebook + GlobalConst.PageIdFacebook;
             intent.setData(Uri.parse(urlBrowser));
         }
         startActivity(intent);
+    }
+
+    //Back to previous fragment when press back button in Actionbar
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            fm.popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

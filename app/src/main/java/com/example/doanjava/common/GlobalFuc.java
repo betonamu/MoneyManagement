@@ -1,6 +1,7 @@
 package com.example.doanjava.common;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.Gravity;

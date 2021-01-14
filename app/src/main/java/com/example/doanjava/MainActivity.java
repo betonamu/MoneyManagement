@@ -4,9 +4,13 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +21,7 @@ import com.example.doanjava.data.model.UserModel;
 import com.example.doanjava.interfaces.ICallBackFireStore;
 import com.example.doanjava.receivers.NotificationReceiver;
 import com.example.doanjava.ui.authentication.LoginActivity;
+import com.example.doanjava.ui.notifications.SettingActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -38,6 +43,7 @@ import androidx.navigation.ui.NavigationUI;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private UserModel user;
     private String currentUserId;
+
+    SharedPreferences pref;
+    String localeName;
+    String currentLanguage = "en", currentLang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         currentUserId = firebaseAuth.getCurrentUser().getUid();
-
         GetIsInputBalance(new ICallBackFireStore() {
             @Override
             public void onCallBack(List lstObject, Object value) {
@@ -76,6 +85,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        currentLanguage = getIntent().getStringExtra(currentLang);
+        pref = getSharedPreferences("PREF", MODE_PRIVATE);
+        localeName = pref.getString("selected_locale", null);
+        if (localeName != null) {
+            setLocale(localeName);
+        }
+    }
+
+    public void setLocale(String localeName) {
+        if (!localeName.equals(currentLanguage)) {
+            Locale myLocale = new Locale(localeName);
+            Resources res = getResources();
+            DisplayMetrics dm = res.getDisplayMetrics();
+            Configuration conf = res.getConfiguration();
+            conf.locale = myLocale;
+            res.updateConfiguration(conf, dm);
+
+            Intent refresh = new Intent(this, MainActivity.class);
+            refresh.putExtra(currentLang, localeName);
+            startActivity(refresh);
+        }
     }
 
     //Create dialog for the user to enter first balance
@@ -118,15 +148,15 @@ public class MainActivity extends AppCompatActivity {
     //Update balance for current user at collection "Users"
     public void UpdateBalanceForCurrentUser(Double valueMoney) {
         db.collection(GlobalConst.UsersTable).document(currentUserId)
-                .update("balance", valueMoney,"isInputBalance",true)
+                .update("balance", valueMoney, "isInputBalance", true)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Input balance successfully", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "Input balance successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     //Set time to wake up device to create daily notification

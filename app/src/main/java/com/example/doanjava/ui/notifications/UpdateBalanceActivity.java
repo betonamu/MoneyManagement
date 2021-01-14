@@ -44,15 +44,15 @@ public class UpdateBalanceActivity extends AppCompatActivity {
         btnUpdateBalance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(txtBalanceValue.getText().toString().trim())){
-                    GlobalFuc.DialogShowMessage(UpdateBalanceActivity.this,GlobalConst.AppTitle,"Vui long nhap so du de cap nhat!");
+                if (TextUtils.isEmpty(txtBalanceValue.getText().toString().trim())) {
+                    GlobalFuc.DialogShowMessage(UpdateBalanceActivity.this, GlobalConst.AppTitle, "Vui long nhap so du de cap nhat!");
                     return;
                 }
                 String[] splitBalance = txtBalanceValue.getText().toString().split(" ");
 
                 /*input value have ","
                 need remove "," character to parse double*/
-                double balanceUpdateValue = Double.parseDouble(splitBalance[1].replace(",",""));
+                double balanceUpdateValue = Double.parseDouble(splitBalance[1].replace(",", ""));
                 UpdateBalanceForCurrentUser(balanceUpdateValue);
             }
         });
@@ -60,12 +60,13 @@ public class UpdateBalanceActivity extends AppCompatActivity {
 
     public void UpdateBalanceForCurrentUser(Double valueMoney) {
         db.collection(GlobalConst.UsersTable).document(currentUserId)
-                .update("balance", valueMoney,"isInputBalance",true)
+                .update("balance", valueMoney, "isInputBalance", true)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(UpdateBalanceActivity.this, "Update balance successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateBalanceActivity.this, getResources().getString(R.string.update_balance_successfully),
+                                    Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }
@@ -80,7 +81,7 @@ public class UpdateBalanceActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         FragmentManager fm = getFragmentManager();
         if (fm.getBackStackEntryCount() > 0) {
             fm.popBackStack();
