@@ -57,6 +57,8 @@
     <string name="prompt_living">Living</string>
     <string name="prompt_car">Car</string>
     <string name="prompt_boy">Boy</string>
+    <string name="prompt_fashion">Fashion</string>
+    <string name="prompt_healthcare">Heath</string>
 
     <string name="item_account_information">Account Information</string>
     <string name="item_history">History</string>
