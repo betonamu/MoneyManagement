@@ -11,7 +11,7 @@
 
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome ! "</string>
     <string name="title_activity_login">LoginActivity</string>
 
     <string name="prompt_email">Email</string>
@@ -37,6 +37,7 @@
     <string name="redirect_login">Already have a account? Sign in now</string>
     <string name="forget_password">Forgot password?</string>
     <string name="save">Save</string>
+    <string name="update">Update</string>
     <string name="create_account_failed">Created with error</string>
     <string name="create_account_successfully">User Created.</string>
     <string name="msg_request_permission">Please accept for required permission.</string>
@@ -48,6 +49,20 @@
     <string name="enter_money">Enter Money</string>
     <string name="update_balance_successfully">Update balance successfully</string>
     <string name="language">Language</string>
+
+    <string name="surplus">Surplus</string>
+    <string name="prompt_surplus">Surplus</string>
+    <string name="prompt_total">Total</string>
+    <string name="prompt_spend">Spend</string>
+    <string name="prompt_loan">Loan</string>
+    <string name="prompt_lend">Lend</string>
+    <string name="prompt_borrow">Borrow</string>
+    <string name="prompt_food">Food</string>
+    <string name="prompt_living">Living</string>
+    <string name="prompt_car">Car</string>
+    <string name="prompt_boy">Boy</string>
+    <string name="prompt_fashion">Fashion</string>
+    <string name="prompt_healthcare">Heath</string>
 
     <string name="item_account_information">Account Information</string>
     <string name="item_history">History</string>
