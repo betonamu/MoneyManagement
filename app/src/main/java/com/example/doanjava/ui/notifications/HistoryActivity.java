@@ -2,10 +2,12 @@ package com.example.doanjava.ui.notifications;
 
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -30,6 +32,10 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -124,6 +130,12 @@ public class HistoryActivity extends AppCompatActivity {
             @Override
             public void onCallBack(List<ExpenseModel> lstObject, Object value) {
                 if (lstObject.size() != 0) {
+                    Collections.sort(lstObject, new Comparator<ExpenseModel>() {
+                        @Override
+                        public int compare(ExpenseModel o1, ExpenseModel o2) {
+                            return o1.Id.compareTo(o2.Id);
+                        }
+                    });
                     tvDataEmpty.setVisibility(View.GONE);
                     adapter = new ListItemHistoryAdapter(lstObject);
                     listViewHistory.setAdapter(adapter);
@@ -131,6 +143,39 @@ public class HistoryActivity extends AppCompatActivity {
                     tvDataEmpty.setText("Chưa có dữ liệu");
                     tvDataEmpty.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        listViewHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                getListHistory(new ICallBackFireStore<ExpenseModel>() {
+                    @Override
+                    public void onCallBack(List<ExpenseModel> lstObject, Object value) {
+                        Collections.sort(lstObject, new Comparator<ExpenseModel>() {
+                            @Override
+                            public int compare(ExpenseModel o1, ExpenseModel o2) {
+                                return o1.Id.compareTo(o2.Id);
+                            }
+                        });
+
+                        ExpenseModel currentItem = lstObject.get(position);
+
+                        Intent intent = new Intent(HistoryActivity.this,UpdateHistoryActivity.class);
+                        Bundle bundle = new Bundle();
+
+                        String createDate = dateFormat.format(currentItem.CreateAt.toDate());
+
+                        bundle.putString("Id",currentItem.Id);
+                        bundle.putString("CategoryId",currentItem.CategoryId);
+                        bundle.putString("CreateAt",createDate);
+                        bundle.putString("Description",currentItem.Description);
+                        bundle.putDouble("Value",currentItem.Value);
+                        intent.putExtras(bundle);
+
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }

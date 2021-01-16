@@ -54,6 +54,7 @@
     <string name="item_language_english">Tiếng Anh</string>
     <string name="item_language_vietnamese">Tiếng Việt</string>
     <string name="language">Ngôn ngữ</string>
+
     <string name="prompt_spend">Chi tiêu</string>
     <string name="prompt_food">Ăn uống</string>
     <string name="prompt_living">Sinh hoạt</string>
@@ -64,5 +65,7 @@
     <string name="prompt_loan">Vay</string>
     <string name="prompt_lend">Cho vay</string>
     <string name="prompt_borrow">Mượn tiền</string>
+
+    <string name="update">"Cập nhật "</string>
 
 </resources>

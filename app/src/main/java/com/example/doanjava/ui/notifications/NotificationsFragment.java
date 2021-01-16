@@ -115,10 +115,10 @@ public class NotificationsFragment extends Fragment {
                     imageView.setImageResource(R.drawable.settings);
                     break;
                 case 2:
-                    imageView.setImageResource(R.drawable.history);
+                    imageView.setImageResource(R.drawable.ic_notifications_black_24dp);
                     break;
                 case 3:
-                    imageView.setImageResource(R.drawable.ic_notifications_black_24dp);
+                    imageView.setImageResource(R.drawable.history);
                     break;
                 case 4:
                     imageView.setImageResource(R.drawable.information);
@@ -129,11 +129,6 @@ public class NotificationsFragment extends Fragment {
             }
             return row;
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -257,6 +252,7 @@ public class NotificationsFragment extends Fragment {
             openGallery();
         }
     }
+
 
     public void uploadPhoto(ICallBackFireStore callBack) {
         if (pickedImgUri != null) {
