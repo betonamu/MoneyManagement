@@ -57,6 +57,13 @@
     <string name="item_setting">Setting</string>
     <string name="item_language_vietnamese">Vietnamese</string>
     <string name="item_language_english">English</string>
+    //Cho vay
+    <string name="loan">Loan</string>
+    <string name="enter_loan_amount">Loan entry</string>
+    <string name="debtor">Debtor</string>
+    <string name="borrowing_date">Borrowing date</string>
+    <string name="pay_date">Pay date</string>
+
 
     <string-array name="list_item_account">
         <item>@string/item_account_information</item>

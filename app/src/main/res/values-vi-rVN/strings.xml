@@ -49,4 +49,10 @@
     <string name="item_language_english">Tiếng Anh</string>
     <string name="item_language_vietnamese">Tiếng Việt</string>
     <string name="language">Ngôn ngữ</string>
+    //Cho vay
+    <string name="loan">Cho vay</string>
+    <string name="enter_loan_amount">Nhập số tiền cho vay</string>
+    <string name="debtor">Người vay nợ</string>
+    <string name="borrowing_date">Ngày mượn</string>
+    <string name="pay_date">Ngày trả</string>
 </resources>
