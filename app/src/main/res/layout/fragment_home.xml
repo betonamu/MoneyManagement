@@ -22,46 +22,40 @@
 
     <TextView
         android:id="@+id/tvSurplus"
-        android:layout_width="0dp"
+        android:layout_width="363dp"
         android:layout_height="70dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/edit_text_style"
         android:hint="@string/prompt_surplus"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvTotal" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
 
     <TextView
         android:id="@+id/tvSpend"
         android:layout_width="94dp"
         android:layout_height="30dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:hint="@string/prompt_spend"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvSurplus" />
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutSpend"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
+        android:id="@+id/constraintLayoutSpend"
+        android:layout_width="363dp"
         android:layout_height="230dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="88dp"
         android:background="@drawable/edit_text_style"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvSpend">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/Ibtn1"
@@ -195,15 +189,87 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.example.doanjava.helpers.CurrencyEditText
-        android:id="@+id/money"
-        android:layout_width="351dp"
-        android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="363dp"
+        android:layout_height="115dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/edit_text_style"
-        android:hint="@string/enter_money"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvSpend"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibtn7"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/edit_text_style"
+            android:src="@drawable/personal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.08" />
+
+        <ImageButton
+            android:id="@+id/ibtn8"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="66dp"
+            android:layout_marginLeft="68dp"
+            android:background="@drawable/edit_text_style"
+            android:src="@drawable/money"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ibtn7"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.12" />
+
+        <TextView
+            android:id="@+id/tv7"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:hint="@string/prompt_loan"
+            app:layout_constraintStart_toStartOf="@+id/ibtn7"
+            app:layout_constraintTop_toBottomOf="@+id/ibtn7" />
+
+        <TextView
+            android:id="@+id/tv8"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:hint="@string/prompt_lend"
+            app:layout_constraintEnd_toEndOf="@+id/ibtn8"
+            app:layout_constraintStart_toStartOf="@+id/ibtn8"
+            app:layout_constraintTop_toBottomOf="@+id/ibtn8" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvLoan"
+        android:layout_width="94dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:hint="@string/prompt_loan"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSurplus"
+        app:layout_constraintVertical_bias="0.808" />
+
+    <!--    <com.example.doanjava.helpers.CurrencyEditText-->
+    <!--        android:id="@+id/money"-->
+    <!--        android:layout_width="351dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@drawable/edit_text_style"-->
+    <!--        android:hint="@string/enter_money"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

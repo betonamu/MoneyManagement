@@ -53,6 +53,9 @@
     <string name="prompt_surplus">Surplus</string>
     <string name="prompt_total">Total</string>
     <string name="prompt_spend">Spend</string>
+    <string name="prompt_loan">Loan</string>
+    <string name="prompt_lend">Lend</string>
+    <string name="prompt_borrow">Borrow</string>
     <string name="prompt_food">Food</string>
     <string name="prompt_living">Living</string>
     <string name="prompt_car">Car</string>

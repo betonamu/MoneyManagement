@@ -41,8 +41,7 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         tvSurplus = (TextView) root.findViewById(R.id.tvSurplus);
 
@@ -89,5 +88,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+
 
 }

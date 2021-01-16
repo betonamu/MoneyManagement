@@ -61,5 +61,8 @@
     <string name="prompt_boy">Con cái</string>
     <string name="prompt_fashion">Trang phục</string>
     <string name="prompt_healthcare">Sức khỏe</string>
+    <string name="prompt_loan">Vay</string>
+    <string name="prompt_lend">Cho vay</string>
+    <string name="prompt_borrow">Mượn tiền</string>
 
 </resources>
