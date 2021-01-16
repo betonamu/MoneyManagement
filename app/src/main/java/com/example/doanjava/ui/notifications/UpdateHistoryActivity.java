@@ -97,7 +97,7 @@ public class UpdateHistoryActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        })
+        });
 
         //Set current values of item has clicked in HistoryActivity
         SetTextForControls();
