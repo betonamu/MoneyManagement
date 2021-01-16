@@ -11,12 +11,12 @@
         android:id="@+id/tvTotal"
         android:layout_width="94dp"
         android:layout_height="25dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:hint="@string/prompt_total"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,9 +30,11 @@
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvLoan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvSpend"
@@ -58,48 +60,48 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/Ibtn1"
+            android:id="@+id/btnFood"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/edit_text_style"
             android:src="@drawable/food"
-            app:layout_constraintBottom_toTopOf="@+id/tv1"
+            app:layout_constraintBottom_toTopOf="@+id/tvFood"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv1"
+            android:id="@+id/tvFood"
             android:layout_width="65dp"
             android:layout_height="25dp"
             android:gravity="center"
             android:hint="@string/prompt_food"
-            app:layout_constraintStart_toStartOf="@id/Ibtn1"
-            app:layout_constraintTop_toBottomOf="@id/Ibtn1" />
+            app:layout_constraintStart_toStartOf="@id/btnFood"
+            app:layout_constraintTop_toBottomOf="@id/btnFood" />
 
         <ImageButton
-            android:id="@+id/Ibtn2"
+            android:id="@+id/btnLiving"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/edit_text_style"
             android:src="@drawable/living"
-            app:layout_constraintEnd_toStartOf="@id/Ibtn3"
-            app:layout_constraintStart_toEndOf="@id/Ibtn1"
+            app:layout_constraintEnd_toStartOf="@id/btnCar"
+            app:layout_constraintStart_toEndOf="@id/btnFood"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv2"
+            android:id="@+id/tvLiving"
             android:layout_width="65dp"
             android:layout_height="25dp"
             android:gravity="center"
             android:hint="@string/prompt_living"
-            app:layout_constraintEnd_toEndOf="@id/Ibtn2"
-            app:layout_constraintStart_toStartOf="@id/Ibtn2"
-            app:layout_constraintTop_toBottomOf="@id/Ibtn2" />
+            app:layout_constraintEnd_toEndOf="@id/btnLiving"
+            app:layout_constraintStart_toStartOf="@id/btnLiving"
+            app:layout_constraintTop_toBottomOf="@id/btnLiving" />
 
         <ImageButton
-            android:id="@+id/Ibtn3"
+            android:id="@+id/btnCar"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginTop="4dp"
@@ -107,11 +109,11 @@
             android:layout_marginRight="4dp"
             android:background="@drawable/edit_text_style"
             android:src="@drawable/car"
-            app:layout_constraintBottom_toTopOf="@+id/tv3"
+            app:layout_constraintBottom_toTopOf="@+id/tvCar"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
-            android:id="@+id/tv3"
+            android:id="@+id/tvCar"
             android:layout_width="65dp"
             android:layout_height="25dp"
             android:layout_marginEnd="4dp"
@@ -123,18 +125,18 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageButton
-            android:id="@+id/Ibtn4"
+            android:id="@+id/btnBoy"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/edit_text_style"
             android:src="@drawable/boy"
-            app:layout_constraintBottom_toTopOf="@+id/tv4"
+            app:layout_constraintBottom_toTopOf="@+id/tvBoy"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv1" />
+            app:layout_constraintTop_toBottomOf="@+id/tvFood" />
 
         <TextView
-            android:id="@+id/tv4"
+            android:id="@+id/tvBoy"
             android:layout_width="65dp"
             android:layout_height="25dp"
             android:layout_marginBottom="4dp"
@@ -144,41 +146,41 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/Ibtn5"
+            android:id="@+id/btnFashion"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/edit_text_style"
             android:src="@drawable/fashion"
-            app:layout_constraintBottom_toTopOf="@+id/tv5"
-            app:layout_constraintEnd_toStartOf="@id/Ibtn6"
-            app:layout_constraintStart_toEndOf="@id/Ibtn4"
-            app:layout_constraintTop_toBottomOf="@+id/tv2" />
+            app:layout_constraintBottom_toTopOf="@+id/tvFashion"
+            app:layout_constraintEnd_toStartOf="@id/btnHealthCare"
+            app:layout_constraintStart_toEndOf="@id/btnBoy"
+            app:layout_constraintTop_toBottomOf="@+id/tvLiving" />
 
         <TextView
-            android:id="@+id/tv5"
+            android:id="@+id/tvFashion"
             android:layout_width="85dp"
             android:layout_height="25dp"
             android:layout_marginBottom="4dp"
             android:gravity="center"
             android:hint="@string/prompt_fashion"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv6"
-            app:layout_constraintStart_toEndOf="@+id/tv4" />
+            app:layout_constraintEnd_toStartOf="@+id/tvHealthCare"
+            app:layout_constraintStart_toEndOf="@+id/tvBoy" />
 
         <ImageButton
-            android:id="@+id/Ibtn6"
+            android:id="@+id/btnHealthCare"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginTop="18dp"
             android:background="@drawable/edit_text_style"
             android:src="@drawable/healthcare"
-            app:layout_constraintBottom_toTopOf="@+id/tv6"
+            app:layout_constraintBottom_toTopOf="@+id/tvHealthCare"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv3" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCar" />
 
         <TextView
-            android:id="@+id/tv6"
+            android:id="@+id/tvHealthCare"
             android:layout_width="65dp"
             android:layout_height="25dp"
             android:layout_marginBottom="4dp"
@@ -200,7 +202,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/ibtn7"
+            android:id="@+id/btnLoand"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginStart="4dp"
@@ -213,7 +215,7 @@
             app:layout_constraintVertical_bias="0.08" />
 
         <ImageButton
-            android:id="@+id/ibtn8"
+            android:id="@+id/btnLend"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_marginStart="66dp"
@@ -221,7 +223,7 @@
             android:background="@drawable/edit_text_style"
             android:src="@drawable/money"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ibtn7"
+            app:layout_constraintStart_toEndOf="@+id/btnLoand"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.12" />
 
@@ -231,8 +233,8 @@
             android:layout_height="25dp"
             android:gravity="center"
             android:hint="@string/prompt_loan"
-            app:layout_constraintStart_toStartOf="@+id/ibtn7"
-            app:layout_constraintTop_toBottomOf="@+id/ibtn7" />
+            app:layout_constraintStart_toStartOf="@+id/btnLoand"
+            app:layout_constraintTop_toBottomOf="@+id/btnLoand" />
 
         <TextView
             android:id="@+id/tv8"
@@ -240,9 +242,9 @@
             android:layout_height="25dp"
             android:gravity="center"
             android:hint="@string/prompt_lend"
-            app:layout_constraintEnd_toEndOf="@+id/ibtn8"
-            app:layout_constraintStart_toStartOf="@+id/ibtn8"
-            app:layout_constraintTop_toBottomOf="@+id/ibtn8" />
+            app:layout_constraintEnd_toEndOf="@+id/btnLend"
+            app:layout_constraintStart_toStartOf="@+id/btnLend"
+            app:layout_constraintTop_toBottomOf="@+id/btnLend" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -250,16 +252,14 @@
         android:id="@+id/tvLoan"
         android:layout_width="94dp"
         android:layout_height="30dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:hint="@string/prompt_loan"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSurplus"
-        app:layout_constraintVertical_bias="0.808" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!--    <com.example.doanjava.helpers.CurrencyEditText-->
     <!--        android:id="@+id/money"-->

@@ -1,5 +1,6 @@
 package com.example.doanjava.ui.home;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +23,7 @@ import com.example.doanjava.common.GlobalConst;
 import com.example.doanjava.common.GlobalFuc;
 import com.example.doanjava.data.model.UserModel;
 import com.example.doanjava.interfaces.ICallBackFireStore;
+import com.example.doanjava.ui.loan.LoanActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +39,8 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private List<UserModel> lstUser = new LinkedList<>();
     private TextView tvSurplus;
+    ImageButton btnLoand,btnLend;
+
 
     private FirebaseFirestore db;
     FirebaseStorage storage;
@@ -44,6 +50,23 @@ public class HomeFragment extends Fragment {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         tvSurplus = (TextView) root.findViewById(R.id.tvSurplus);
+        btnLoand = root.findViewById(R.id.btnLoand);
+        btnLend = root.findViewById(R.id.btnLend);
+
+        btnLoand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LoanActivity.class));
+            }
+        });
+
+        btnLend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LoanActivity.class));
+            }
+        });
+
 
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();

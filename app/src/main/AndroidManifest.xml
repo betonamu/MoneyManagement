@@ -35,6 +35,9 @@
             android:name=".ui.notifications.HistoryActivity"
             android:label="@string/item_history" />
         <activity
+            android:name=".ui.loan.LoanActivity"
+            android:label="@string/prompt_loan" />
+        <activity
             android:name=".ui.authentication.RegisterActivity"
             android:label="@string/title_sign_up" />
         <activity
