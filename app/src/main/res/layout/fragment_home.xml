@@ -11,12 +11,12 @@
         android:id="@+id/tvTotal"
         android:layout_width="94dp"
         android:layout_height="25dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:hint="@string/prompt_total"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
+        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,9 +30,11 @@
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvLoan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvSpend"
@@ -250,16 +252,14 @@
         android:id="@+id/tvLoan"
         android:layout_width="94dp"
         android:layout_height="30dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:hint="@string/prompt_loan"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSurplus"
-        app:layout_constraintVertical_bias="0.808" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!--    <com.example.doanjava.helpers.CurrencyEditText-->
     <!--        android:id="@+id/money"-->
