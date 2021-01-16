@@ -49,4 +49,5 @@
     <string name="item_language_english">Tiếng Anh</string>
     <string name="item_language_vietnamese">Tiếng Việt</string>
     <string name="language">Ngôn ngữ</string>
+    <string name="update">"Cập nhật "</string>
 </resources>

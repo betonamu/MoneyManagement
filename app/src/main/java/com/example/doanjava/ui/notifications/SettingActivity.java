@@ -22,7 +22,7 @@ import java.util.Locale;
 public class SettingActivity extends AppCompatActivity {
     Spinner spinnerLanguage;
 
-    String currentLanguage , currentLang;
+    String currentLanguage, currentLang;
     private int index;
     SharedPreferences pref;
 
@@ -31,18 +31,18 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerLanguage = (Spinner)findViewById(R.id.spinner_language);
+        spinnerLanguage = (Spinner) findViewById(R.id.spinner_language);
+        currentLanguage = getIntent().getStringExtra(currentLang);
 
-
-        pref = getSharedPreferences("PREF",MODE_PRIVATE);
-        int position = pref.getInt("position_language",0);
-        currentLanguage =  pref.getString("selected_locale",null);
+        pref = getSharedPreferences("PREF", MODE_PRIVATE);
+        int position = pref.getInt("position_language", 0);
+        currentLanguage = pref.getString("selected_locale", null);
         spinnerLanguage.setSelection(position);
 
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
                         index = 0;
                         setLocale("vi");
@@ -70,9 +70,9 @@ public class SettingActivity extends AppCompatActivity {
             conf.locale = myLocale;
             res.updateConfiguration(conf, dm);
 
-            SharedPreferences p =  getSharedPreferences("PREF", MODE_PRIVATE);
+            SharedPreferences p = getSharedPreferences("PREF", MODE_PRIVATE);
             p.edit().putString("selected_locale", localeName).commit();
-            p.edit().putInt("position_language",index).commit();
+            p.edit().putInt("position_language", index).commit();
 
             Intent refresh = new Intent(this, SettingActivity.class);
             refresh.putExtra(currentLang, localeName);
@@ -91,7 +91,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         FragmentManager fm = getFragmentManager();
         if (fm.getBackStackEntryCount() > 0) {
             fm.popBackStack();
