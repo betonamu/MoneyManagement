@@ -29,6 +29,7 @@ import com.example.doanjava.common.GlobalConst;
 import com.example.doanjava.common.GlobalFuc;
 import com.example.doanjava.data.model.ExpenseCategoryModel;
 import com.example.doanjava.data.model.ExpenseModel;
+import com.example.doanjava.data.model.UserModel;
 import com.example.doanjava.helpers.CurrencyEditText;
 import com.example.doanjava.interfaces.ICallBackFireStore;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -61,8 +62,9 @@ public class UpdateHistoryActivity extends AppCompatActivity {
     //Shared variables
     private List<ExpenseCategoryModel> lstExpenseCategory;
     private SimpleDateFormat dateFormat;
-    private String categoryId, createAt, id, description, photoUri;
+    private String categoryId, createAt, id, description, photoUri, currentUserId;
     private Double value;
+    private UserModel user;
     private Uri pickedImgUri;
     private final int REQUEST_CODE = 2;
 
@@ -91,6 +93,7 @@ public class UpdateHistoryActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
+        currentUserId = firebaseAuth.getCurrentUser().getUid();
 
         db.collection(GlobalConst.ExpenseCategoriesTable).orderBy("Id").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -145,6 +148,11 @@ public class UpdateHistoryActivity extends AppCompatActivity {
                         /*input value have "," character
                         need remove "," character to parse double*/
                         final Double valueMoney = Double.parseDouble(splitBalance[1].replace(",", ""));
+
+                        /*Vì ở đây cập lại khoản chi cho nên phải lấy giá trị
+                        khoản chi nhập mới - giá trị cũ của khoản chi đang cập nhật */
+                        Double balanceToUpdate = valueMoney - value;
+
                         description = txtDescription.getText().toString();
                         categoryId = ((ExpenseCategoryModel) spinnerMoney.getSelectedItem()).Id;
 
@@ -163,6 +171,7 @@ public class UpdateHistoryActivity extends AppCompatActivity {
 
                                 //update data to FireStore
                                 UpdateHistoryExpense(currentDocumentId, expenseModel);
+                                UpdateBalanceOfCurrentUser(balanceToUpdate);
                             }
                         });
                     }
@@ -234,6 +243,51 @@ public class UpdateHistoryActivity extends AppCompatActivity {
                             getResources().getString(R.string.app_name),
                             getResources().getString(R.string.update_expense_successfully));
                 }
+            }
+        });
+    }
+
+    /**
+     * check current user has entered balance or not
+     *
+     * @param callBack
+     */
+    public void GetBalanceOfCurrentUserToUpdate(ICallBackFireStore callBack) {
+        db.collection(GlobalConst.UsersTable).document(currentUserId)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    //Converts response data to UserModel
+                    user = task.getResult().toObject(UserModel.class);
+                }
+                //callback value when load data successfully from firebase
+                callBack.onCallBack(null, user);
+            }
+        });
+    }
+
+    public void UpdateBalanceOfCurrentUser(Double valueMoney) {
+        GetBalanceOfCurrentUserToUpdate(new ICallBackFireStore() {
+            @Override
+            public void onCallBack(List lstObject, Object value) {
+                if (((UserModel) value).balance == null) {
+                    ((UserModel) value).balance = 0.0;
+                }
+                Double balanceOfCurrentUser = ((UserModel) value).balance - valueMoney;
+                if (balanceOfCurrentUser < valueMoney) {
+                    GlobalFuc.DialogShowMessage(UpdateHistoryActivity.this, GlobalConst.AppTitle, "Your balance not enough!");
+                } else
+                    db.collection(GlobalConst.UsersTable).document(currentUserId)
+                            .update("balance", balanceOfCurrentUser)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(UpdateHistoryActivity.this, "Save data successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
             }
         });
     }
