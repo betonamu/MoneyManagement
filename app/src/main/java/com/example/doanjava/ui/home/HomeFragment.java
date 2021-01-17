@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.doanjava.MainActivity;
 import com.example.doanjava.R;
 import com.example.doanjava.common.GlobalConst;
 import com.example.doanjava.common.GlobalFuc;
@@ -39,7 +40,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private List<UserModel> lstUser = new LinkedList<>();
     private TextView tvSurplus;
-    ImageButton btnLoand,btnLend;
+    ImageButton btnLoand,btnLend,btnFood,btnLiving,btnCar,btnBoy,btnFashion,btnHealthCare;
 
 
     private FirebaseFirestore db;
@@ -47,16 +48,70 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         tvSurplus = (TextView) root.findViewById(R.id.tvSurplus);
         btnLoand = root.findViewById(R.id.btnLoand);
         btnLend = root.findViewById(R.id.btnLend);
+        btnFood = root.findViewById(R.id.btnFood);
+        btnLiving = root.findViewById(R.id.btnLiving);
+        btnCar = root.findViewById(R.id.btnCar);
+        btnBoy = root.findViewById(R.id.btnBoy);
+        btnFashion = root.findViewById(R.id.btnFashion);
+        btnHealthCare = root.findViewById(R.id.btnHealthCare);
 
         btnLoand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), LoanActivity.class));
+            }
+        });
+
+        btnFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeViewModel.setPositionSpinner("0");
+                MainActivity.SwitchFragment(R.id.navigation_add);
+            }
+        });
+
+        btnLiving.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeViewModel.setPositionSpinner("1");
+                MainActivity.SwitchFragment(R.id.navigation_add);
+            }
+        });
+
+        btnCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeViewModel.setPositionSpinner("2");
+                MainActivity.SwitchFragment(R.id.navigation_add);
+            }
+        });
+
+        btnBoy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeViewModel.setPositionSpinner("3");
+                MainActivity.SwitchFragment(R.id.navigation_add);
+            }
+        });
+
+        btnFashion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeViewModel.setPositionSpinner("4");
+                MainActivity.SwitchFragment(R.id.navigation_add);
+            }
+        });
+
+        btnHealthCare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeViewModel.setPositionSpinner("5");
+                MainActivity.SwitchFragment(R.id.navigation_add);
             }
         });
 
