@@ -170,7 +170,7 @@ public class AddFragment extends Fragment {
 
                     /*input value have "," character
                     need remove "," character to parse double*/
-                    final Double valueMoney = Double.parseDouble(splitBalance[1].replace(",",""));
+                    final Double valueMoney = Double.parseDouble(splitBalance[1].replace(",", ""));
                     Date dateParse = null;
                     try {
                         dateParse = dateFormat.parse(txtCreateAt.getText().toString());
@@ -186,6 +186,12 @@ public class AddFragment extends Fragment {
                     //Add data to model Expense
                     ExpenseModel expense = new ExpenseModel(id, valueMoney, categoryId, description, createDate, currentUserId);
 
+                    //set empty for EditTexts after save
+                    txtValueMoney.setText("");
+                    txtCreateAt.setText("");
+                    txtDescription.setText("");
+
+                    //update data to firebase
                     UpdateBalanceOfCurrentUser(valueMoney, expense);
                 }
             });
@@ -201,6 +207,8 @@ public class AddFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isComplete()) {
                             maxId = task.getResult().size();
+                            if (maxId == 0)
+                                maxId = 1;
                         }
                         callBack.onCallBack(null, maxId);
                     }
@@ -243,11 +251,6 @@ public class AddFragment extends Fragment {
                                         //Push data to FireStore
                                         db.collection(GlobalConst.ExpensesTable).document().set(expense);
                                         Toast.makeText(getActivity(), "Save data successfully", Toast.LENGTH_SHORT).show();
-
-                                        //set empty for EditTexts after save
-                                        txtValueMoney.setText("");
-                                        txtCreateAt.setText("");
-                                        txtDescription.setText("");
                                     }
                                 }
                             });

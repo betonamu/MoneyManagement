@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences pref;
     String localeName;
     String currentLanguage = "en", currentLang;
+    private static NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_add)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
@@ -91,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
         if (localeName != null) {
             setLocale(localeName);
         }
+    }
+
+    //this method use to switch from this activity to other activity
+    public static void SwitchFragment(int fragmentId){
+        navController.navigate(R.id.navigation_add);
     }
 
     public void setLocale(String localeName) {

@@ -133,13 +133,13 @@ public class HistoryActivity extends AppCompatActivity {
                     Collections.sort(lstObject, new Comparator<ExpenseModel>() {
                         @Override
                         public int compare(ExpenseModel o1, ExpenseModel o2) {
-                            return o1.Id.compareTo(o2.Id);
+                            return o2.CreateAt.compareTo(o1.CreateAt);
                         }
                     });
                     tvDataEmpty.setVisibility(View.GONE);
                     adapter = new ListItemHistoryAdapter(lstObject);
                     listViewHistory.setAdapter(adapter);
-                }else{
+                } else {
                     tvDataEmpty.setText("Chưa có dữ liệu");
                     tvDataEmpty.setVisibility(View.VISIBLE);
                 }
@@ -152,25 +152,26 @@ public class HistoryActivity extends AppCompatActivity {
                 getListHistory(new ICallBackFireStore<ExpenseModel>() {
                     @Override
                     public void onCallBack(List<ExpenseModel> lstObject, Object value) {
+                        //Sort lstObject by day
                         Collections.sort(lstObject, new Comparator<ExpenseModel>() {
                             @Override
                             public int compare(ExpenseModel o1, ExpenseModel o2) {
-                                return o1.Id.compareTo(o2.Id);
+                                return o2.CreateAt.compareTo(o1.CreateAt);
                             }
                         });
 
                         ExpenseModel currentItem = lstObject.get(position);
 
-                        Intent intent = new Intent(HistoryActivity.this,UpdateHistoryActivity.class);
+                        Intent intent = new Intent(HistoryActivity.this, UpdateHistoryActivity.class);
                         Bundle bundle = new Bundle();
 
                         String createDate = dateFormat.format(currentItem.CreateAt.toDate());
 
-                        bundle.putString("Id",currentItem.Id);
-                        bundle.putString("CategoryId",currentItem.CategoryId);
-                        bundle.putString("CreateAt",createDate);
-                        bundle.putString("Description",currentItem.Description);
-                        bundle.putDouble("Value",currentItem.Value);
+                        bundle.putString("Id", currentItem.Id);
+                        bundle.putString("CategoryId", currentItem.CategoryId);
+                        bundle.putString("CreateAt", createDate);
+                        bundle.putString("Description", currentItem.Description);
+                        bundle.putDouble("Value", currentItem.Value);
                         intent.putExtras(bundle);
 
                         startActivity(intent);
