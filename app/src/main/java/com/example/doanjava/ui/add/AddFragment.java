@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.InputType;
@@ -30,6 +31,7 @@ import com.example.doanjava.data.model.ExpenseCategoryModel;
 import com.example.doanjava.data.model.ExpenseModel;
 import com.example.doanjava.data.model.UserModel;
 import com.example.doanjava.interfaces.ICallBackFireStore;
+import com.example.doanjava.ui.home.HomeViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -61,6 +63,7 @@ public class AddFragment extends Fragment {
     private ExpenseCategoryModel expenseCategoryModel = new ExpenseCategoryModel();
     private UserModel user;
     SimpleDateFormat dateFormat = new SimpleDateFormat(GlobalConst.DateMonthYearFormat, Locale.ENGLISH);
+    private HomeViewModel homeViewModel;
 
     //initialize shared variables
     private String categoryId;
@@ -73,10 +76,11 @@ public class AddFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_add, container, false);
         setHasOptionsMenu(true);
         FirebaseApp.initializeApp(getActivity());
+
+        homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
 
         //Binding Java variables with controls in XML
         spinnerMoney = root.findViewById(R.id.spinner_category);
@@ -102,6 +106,13 @@ public class AddFragment extends Fragment {
                                         android.R.layout.simple_spinner_item, lstExpenseCategory);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 spinnerMoney.setAdapter(adapter);
+
+                                homeViewModel.getPositionSpinner().observe(getViewLifecycleOwner(), new Observer<String>() {
+                                    @Override
+                                    public void onChanged(String s) {
+                                        spinnerMoney.setSelection(Integer.parseInt(s));
+                                    }
+                                });
                             } catch (Exception e) {
                                 //Toast.makeText(getActivity(), "Error when load data", Toast.LENGTH_LONG).show();
                             }
