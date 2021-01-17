@@ -49,7 +49,7 @@ public class NotificationHelper {
             int importance = NotificationManager.IMPORTANCE_HIGH;
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "NOTIFICATION_CHANNEL_NAME", importance);
             notificationChannel.enableLights(true);
-            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.setLightColor(Color.GREEN);
             notificationChannel.enableVibration(true);
             notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
             assert mNotificationManager != null;
