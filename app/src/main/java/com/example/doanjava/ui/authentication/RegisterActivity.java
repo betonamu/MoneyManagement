@@ -131,10 +131,8 @@ public class RegisterActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         PReqCode);
             }
-
         } else
             openGallery();
-
     }
 
     @Override
@@ -241,8 +239,8 @@ public class RegisterActivity extends AppCompatActivity {
                     });
                 }
             });
-        }else{
-            callBack.onCallBack(null,null);
+        } else {
+            callBack.onCallBack(null, null);
         }
     }
 }

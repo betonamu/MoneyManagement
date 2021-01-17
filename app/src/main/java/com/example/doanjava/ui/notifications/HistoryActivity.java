@@ -126,26 +126,6 @@ public class HistoryActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        getListHistory(new ICallBackFireStore<ExpenseModel>() {
-            @Override
-            public void onCallBack(List<ExpenseModel> lstObject, Object value) {
-                if (lstObject.size() != 0) {
-                    Collections.sort(lstObject, new Comparator<ExpenseModel>() {
-                        @Override
-                        public int compare(ExpenseModel o1, ExpenseModel o2) {
-                            return o2.CreateAt.compareTo(o1.CreateAt);
-                        }
-                    });
-                    tvDataEmpty.setVisibility(View.GONE);
-                    adapter = new ListItemHistoryAdapter(lstObject);
-                    listViewHistory.setAdapter(adapter);
-                } else {
-                    tvDataEmpty.setText("Chưa có dữ liệu");
-                    tvDataEmpty.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
         listViewHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -172,11 +152,36 @@ public class HistoryActivity extends AppCompatActivity {
                         bundle.putString("CreateAt", createDate);
                         bundle.putString("Description", currentItem.Description);
                         bundle.putDouble("Value", currentItem.Value);
+                        bundle.putString("PhotoUri", currentItem.PhotoUri);
                         intent.putExtras(bundle);
 
                         startActivity(intent);
                     }
                 });
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getListHistory(new ICallBackFireStore<ExpenseModel>() {
+            @Override
+            public void onCallBack(List<ExpenseModel> lstObject, Object value) {
+                if (lstObject.size() != 0) {
+                    Collections.sort(lstObject, new Comparator<ExpenseModel>() {
+                        @Override
+                        public int compare(ExpenseModel o1, ExpenseModel o2) {
+                            return o2.CreateAt.compareTo(o1.CreateAt);
+                        }
+                    });
+                    tvDataEmpty.setVisibility(View.GONE);
+                    adapter = new ListItemHistoryAdapter(lstObject);
+                    listViewHistory.setAdapter(adapter);
+                } else {
+                    tvDataEmpty.setText("Chưa có dữ liệu");
+                    tvDataEmpty.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

@@ -12,10 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.notifications.UpdateHistoryActivity"></activity>
+        <activity android:name=".ui.notifications.UpdateHistoryActivity"
+            android:label="@string/title_update_history"></activity>
         <activity
             android:name=".ui.notifications.SettingActivity"
-            android:label="Setting Activity" />
+            android:label="@string/title_setting" />
         <activity
             android:name=".ui.notifications.UpdateBalanceActivity"
             android:label="@string/update_balance" />

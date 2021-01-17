@@ -8,7 +8,8 @@
     <string name="title_user">User</string>
     <string name="title_sign_in">Login</string>
     <string name="title_sign_up">Register</string>
-
+    <string name="title_setting">Setting</string>
+    <string name="title_update_history">Update History</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="welcome">"Welcome ! "</string>
@@ -25,10 +26,12 @@
     <string name="action_sign_in_short">Sign In</string>
 
     <string name="invalid_username">Not a valid Email</string>
-    <string name="required_username">Username is required</string>
-    <string name="required_name">FullName is required</string>
-    <string name="required_password">Password is required</string>
-    <string name="required_phone">Phone number is required</string>
+    <string name="required_username">Username is required!</string>
+    <string name="required_name">FullName is required!</string>
+    <string name="required_password">Password is required!</string>
+    <string name="required_phone">Phone number is required!</string>
+    <string name="required_date">Date is required!</string>
+    <string name="required_money">Input money is required!</string>
     <string name="required_re_password">Confirm password is required</string>
     <string name="invalid_password">Password must be >5 characters</string>
 
@@ -38,17 +41,19 @@
     <string name="forget_password">Forgot password?</string>
     <string name="save">Save</string>
     <string name="update">Update</string>
-    <string name="create_account_failed">Created with error</string>
-    <string name="create_account_successfully">User Created.</string>
-    <string name="msg_request_permission">Please accept for required permission.</string>
     <string name="close">Close</string>
     <string name="change_password">Change Password</string>
     <string name="update_balance">Update Balance</string>
     <string name="enter_date">Enter date</string>
     <string name="enter_description">Enter date</string>
     <string name="enter_money">Enter Money</string>
-    <string name="update_balance_successfully">Update balance successfully</string>
     <string name="language">Language</string>
+
+    <string name="create_account_failed">Created with error</string>
+    <string name="create_account_successfully">User Created.</string>
+    <string name="msg_request_permission">Please accept for required permission.</string>
+    <string name="update_balance_successfully">Updated balance successfully</string>
+    <string name="update_expense_successfully">Updated expense successfully</string>
 
     <string name="surplus">Surplus</string>
     <string name="prompt_surplus">Surplus</string>
