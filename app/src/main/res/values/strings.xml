@@ -63,6 +63,7 @@
     <string name="prompt_boy">Boy</string>
     <string name="prompt_fashion">Fashion</string>
     <string name="prompt_healthcare">Heath</string>
+    <string name="expenditure_statistics_table">Expenditure statistics table</string>
 
     <string name="item_account_information">Account Information</string>
     <string name="item_history">History</string>
@@ -78,6 +79,7 @@
     <string name="debtor">Debtor</string>
     <string name="borrowing_date">Borrowing date</string>
     <string name="pay_date">Pay date</string>
+    //Thống kê
 
 
     <string-array name="list_item_account">

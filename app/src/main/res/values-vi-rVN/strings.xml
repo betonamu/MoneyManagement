@@ -72,6 +72,7 @@
     <string name="prompt_loan">Vay</string>
     <string name="prompt_lend">Cho vay</string>
     <string name="prompt_borrow">Mượn tiền</string>
+    <string name="expenditure_statistics_table">Bảng thống kê chi tiêu</string>
 
     <string name="update">"Cập nhật "</string>
 

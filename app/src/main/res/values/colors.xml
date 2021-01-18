@@ -34,4 +34,6 @@
     <color name="Python">#66BB6A</color>
     <color name="CPP">#EF5350</color>
     <color name="Java">#29B6F6</color>
+    <color name="fashion">#FF00FF</color>
+    <color name="healthcare">#C0C0C0</color>
 </resources>
