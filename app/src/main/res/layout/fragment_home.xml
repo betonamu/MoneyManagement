@@ -1,61 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".ui.home.HomeFragment">
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeFragment">
 
     <TextView
         android:id="@+id/tvTotal"
-        android:layout_width="94dp"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
+        android:layout_marginLeft="25dp"
         android:gravity="center"
         android:hint="@string/prompt_total"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvSurplus"
-        android:layout_width="363dp"
+        android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_style"
         android:hint="@string/prompt_surplus"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvLoan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotal"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
 
     <TextView
         android:id="@+id/tvSpend"
-        android:layout_width="94dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:hint="@string/prompt_spend"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutSpend"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutSpend"
-        android:layout_width="363dp"
+        android:layout_width="0dp"
         android:layout_height="230dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/edit_text_style"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSpend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -191,13 +198,29 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/tvLoan"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:hint="@string/prompt_loan"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSurplus"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="363dp"
+        android:layout_width="0dp"
         android:layout_height="115dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/edit_text_style"
-        app:layout_constraintBottom_toTopOf="@+id/tvSpend"
+        app:layout_constraintTop_toBottomOf="@id/tvLoan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -247,29 +270,5 @@
             app:layout_constraintTop_toBottomOf="@+id/btnLend" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/tvLoan"
-        android:layout_width="94dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:hint="@string/prompt_loan"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!--    <com.example.doanjava.helpers.CurrencyEditText-->
-    <!--        android:id="@+id/money"-->
-    <!--        android:layout_width="351dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@drawable/edit_text_style"-->
-    <!--        android:hint="@string/enter_money"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
