@@ -48,6 +48,8 @@
     <string name="enter_description">Enter date</string>
     <string name="enter_money">Enter Money</string>
     <string name="language">Language</string>
+    <string name="no_filter">No Filter</string>
+    <string name="no_data">No data available</string>
 
     <string name="create_account_failed">Created with error</string>
     <string name="create_account_successfully">User Created.</string>

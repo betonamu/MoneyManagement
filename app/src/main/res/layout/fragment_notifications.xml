@@ -64,3 +64,4 @@
         app:layout_constraintTop_toBottomOf="@+id/hr_notification_fragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

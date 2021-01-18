@@ -156,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
         fullName = mFullName.getText().toString().trim();
 
         if (TextUtils.isEmpty(fullName)) {
-            mEmail.setError(getResources().getString(R.string.required_name));
+            mFullName.setError(getResources().getString(R.string.required_name));
             return;
         }
         if (TextUtils.isEmpty(username)) {
@@ -167,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         if (TextUtils.isEmpty(phoneNumber)) {
-            mEmail.setError(getResources().getString(R.string.required_phone));
+            mPhoneNumber.setError(getResources().getString(R.string.required_phone));
             return;
         }
         if (TextUtils.isEmpty(password)) {
