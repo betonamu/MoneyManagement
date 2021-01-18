@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,18 +38,22 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
 public class HistoryActivity extends AppCompatActivity {
+    private ListView listViewHistory;
+    private TextView tvDataEmpty;
+    private Spinner spinnerFilter;
 
-    FirebaseFirestore db;
-    FirebaseAuth firebaseAuth;
-    List<ExpenseModel> lstHistory;
-    ListView listViewHistory;
-    TextView tvDataEmpty;
     private ListItemHistoryAdapter adapter;
-    SimpleDateFormat dateFormat = new SimpleDateFormat(GlobalConst.DateMonthYearFormat, Locale.getDefault());
+    private SimpleDateFormat dateFormat = new SimpleDateFormat(GlobalConst.DateMonthYearFormat, Locale.getDefault());
+    private List<ExpenseCategoryModel> lstExpenseCategory;
+    private List<ExpenseModel> lstHistory;
+
+    private FirebaseFirestore db;
+    private FirebaseAuth firebaseAuth;
 
     class ListItemHistoryAdapter extends ArrayAdapter<ExpenseModel> {
         private List<ExpenseModel> _lstItem;
@@ -120,8 +126,11 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        lstExpenseCategory = new LinkedList<>();
+
         listViewHistory = (ListView) findViewById(R.id.list_item_history);
         tvDataEmpty = (TextView) findViewById(R.id.tv_data_empty);
+        spinnerFilter = (Spinner) findViewById(R.id.spinner_filter_category);
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -160,28 +169,102 @@ public class HistoryActivity extends AppCompatActivity {
                 });
             }
         });
+
+        db.collection(GlobalConst.ExpenseCategoriesTable).orderBy("Id").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            lstExpenseCategory = task.getResult().toObjects(ExpenseCategoryModel.class);
+                            lstExpenseCategory.add(0, new ExpenseCategoryModel("0",
+                                    getResources().getString(R.string.no_filter)));
+                            try {
+                                ArrayAdapter<ExpenseCategoryModel> adapter = new ArrayAdapter<ExpenseCategoryModel>(HistoryActivity.this,
+                                        android.R.layout.simple_spinner_item, lstExpenseCategory);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinnerFilter.setAdapter(adapter);
+                            } catch (Exception e) {
+                                //Toast.makeText(getActivity(), "Error when load data", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        NoFilterHistory();
+                        break;
+                    case 1:
+                        FilterHistoryById(position);
+                        break;
+                    case 2:
+                        FilterHistoryById(position);
+                        break;
+                    case 3:
+                        FilterHistoryById(position);
+                        break;
+                    case 4:
+                        FilterHistoryById(position);
+                        break;
+                    case 5:
+                        FilterHistoryById(position);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+    }
+
+    /**
+     * get data from listHistory to set into adapter of spinner
+     *
+     * @param lstHistory
+     */
+    public void SetListHistoryToAdapter(List<ExpenseModel> lstHistory) {
+        if (lstHistory.size() != 0) {
+            Collections.sort(lstHistory, new Comparator<ExpenseModel>() {
+                @Override
+                public int compare(ExpenseModel o1, ExpenseModel o2) {
+                    return o2.CreateAt.compareTo(o1.CreateAt);
+                }
+            });
+            tvDataEmpty.setVisibility(View.GONE);
+            adapter = new ListItemHistoryAdapter(lstHistory);
+            listViewHistory.setAdapter(adapter);
+        } else {
+            listViewHistory.setAdapter(null);
+            tvDataEmpty.setText(getResources().getString(R.string.no_data));
+            tvDataEmpty.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void FilterHistoryById(int position) {
+        getListHistoryById(new ICallBackFireStore<ExpenseModel>() {
+            @Override
+            public void onCallBack(List<ExpenseModel> lstObject, Object value) {
+                SetListHistoryToAdapter(lstObject);
+            }
+        }, String.valueOf(position));
+    }
+
+    public void NoFilterHistory() {
         getListHistory(new ICallBackFireStore<ExpenseModel>() {
             @Override
             public void onCallBack(List<ExpenseModel> lstObject, Object value) {
-                if (lstObject.size() != 0) {
-                    Collections.sort(lstObject, new Comparator<ExpenseModel>() {
-                        @Override
-                        public int compare(ExpenseModel o1, ExpenseModel o2) {
-                            return o2.CreateAt.compareTo(o1.CreateAt);
-                        }
-                    });
-                    tvDataEmpty.setVisibility(View.GONE);
-                    adapter = new ListItemHistoryAdapter(lstObject);
-                    listViewHistory.setAdapter(adapter);
-                } else {
-                    tvDataEmpty.setText("Chưa có dữ liệu");
-                    tvDataEmpty.setVisibility(View.VISIBLE);
-                }
+                SetListHistoryToAdapter(lstObject);
             }
         });
     }
@@ -190,6 +273,23 @@ public class HistoryActivity extends AppCompatActivity {
     public void getListHistory(ICallBackFireStore callBack) {
         db.collection(GlobalConst.ExpensesTable)
                 .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
+                        }
+                        callBack.onCallBack(lstHistory, null);
+                    }
+                });
+    }
+
+    //Get data from collection "Expense" in FireStore
+    public void getListHistoryById(ICallBackFireStore callBack, String categoryId) {
+        db.collection(GlobalConst.ExpensesTable)
+                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
+                .whereEqualTo("CategoryId", categoryId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

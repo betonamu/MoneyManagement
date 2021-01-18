@@ -80,5 +80,7 @@
     <string name="action_sign_in">Đăng nhập</string>
     <string name="title_setting">Cài đặt</string>
     <string name="title_update_history">Cập nhât chi tiêu</string>
+    <string name="no_filter">Không lọc</string>
+    <string name="no_data">Không có dữ liệu</string>
 
 </resources>
