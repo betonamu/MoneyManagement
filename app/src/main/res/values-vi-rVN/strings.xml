@@ -82,5 +82,6 @@
     <string name="title_update_history">Cập nhât chi tiêu</string>
     <string name="no_filter">Không lọc</string>
     <string name="no_data">Không có dữ liệu</string>
+    <string name="prompt_collect">Thu tiền</string>
 
 </resources>
