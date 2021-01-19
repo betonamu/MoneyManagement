@@ -71,6 +71,7 @@
     <string name="prompt_fashion">Fashion</string>
     <string name="prompt_healthcare">Heath</string>
     <string name="prompt_collect">Collect</string>
+    <string name="prompt_salary">Salary</string>
 
     <string name="item_account_information">Account Information</string>
     <string name="item_history">History</string>

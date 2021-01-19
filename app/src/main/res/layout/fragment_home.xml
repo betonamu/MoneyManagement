@@ -14,6 +14,16 @@
         tools:context=".ui.home.HomeFragment">
 
         <TextView
+            android:id="@+id/tvBlank"
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            android:gravity="center"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutSpend" />
+
+        <TextView
             android:id="@+id/tvCollect"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
@@ -31,12 +41,13 @@
             android:layout_width="0dp"
             android:layout_height="115dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/edit_text_style"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCollect">
+
             <ImageButton
                 android:id="@+id/btnWallet"
                 android:layout_width="65dp"
@@ -53,7 +64,7 @@
                 android:layout_width="65dp"
                 android:layout_height="25dp"
                 android:gravity="center"
-                android:hint="@string/prompt_collect"
+                android:hint="@string/prompt_salary"
                 app:layout_constraintStart_toStartOf="@id/btnWallet"
                 app:layout_constraintTop_toBottomOf="@id/btnWallet" />
 
