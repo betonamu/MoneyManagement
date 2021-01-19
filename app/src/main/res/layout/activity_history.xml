@@ -8,15 +8,28 @@
         android:id="@+id/spinner_filter_category"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:background="@drawable/spinner_style"
         android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></Spinner>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".4"></Spinner>
+
+    <Spinner
+        android:id="@+id/spinner_filter_money"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/spinner_style"
+        android:entries="@array/list_item_value_money"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent=".4"></Spinner>
 
     <TextView
         android:id="@+id/tv_data_empty"
@@ -35,9 +48,9 @@
         android:id="@+id/list_item_history"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ListView>
+        app:layout_constraintTop_toBottomOf="@id/spinner_filter_category"></ListView>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

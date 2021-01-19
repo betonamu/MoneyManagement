@@ -82,5 +82,8 @@
     <string name="title_update_history">Cập nhât chi tiêu</string>
     <string name="no_filter">Không lọc</string>
     <string name="no_data">Không có dữ liệu</string>
+    <string name="item_less_100">Nhỏ hơn 100K</string>
+    <string name="item_100_500">Từ 100 - 500K</string>
+    <string name="item_greater_500">Lớn hơn 500K</string>
 
 </resources>
