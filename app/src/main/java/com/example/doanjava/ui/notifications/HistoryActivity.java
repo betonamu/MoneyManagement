@@ -45,7 +45,7 @@ import java.util.Locale;
 public class HistoryActivity extends AppCompatActivity {
     private ListView listViewHistory;
     private TextView tvDataEmpty;
-    private Spinner spinnerFilter;
+    private Spinner spinnerFilterByCategory, spinnerFilterByMoney;
 
     private ListItemHistoryAdapter adapter;
     private SimpleDateFormat dateFormat = new SimpleDateFormat(GlobalConst.DateMonthYearFormat, Locale.getDefault());
@@ -88,7 +88,12 @@ public class HistoryActivity extends AppCompatActivity {
 
             //((TextView) row.findViewById(R.id.txt_id)).setText(categoryId);
             ((TextView) row.findViewById(R.id.txt_create_at_history)).setText(createAt);
-            ((TextView) row.findViewById(R.id.txt_value_history)).setText(valueMoney + " VND");
+            if (categoryId.equals("7")) {
+                ((TextView) row.findViewById(R.id.txt_value_history)).setText("+ " + valueMoney + " VND");
+                ((TextView) row.findViewById(R.id.txt_value_history)).setTextColor(getResources().getColor(R.color.red));
+            } else {
+                ((TextView) row.findViewById(R.id.txt_value_history)).setText("- " + valueMoney + " VND");
+            }
 
             switch (item.CategoryId) {
                 case "1":
@@ -115,6 +120,10 @@ public class HistoryActivity extends AppCompatActivity {
                     ((ImageView) row.findViewById(R.id.image_list_view_history))
                             .setImageResource(R.drawable.healthcare);
                     break;
+                case "7":
+                    ((ImageView) row.findViewById(R.id.image_list_view_history))
+                            .setImageResource(R.drawable.collect_money);
+                    break;
             }
             return row;
         }
@@ -130,7 +139,8 @@ public class HistoryActivity extends AppCompatActivity {
 
         listViewHistory = (ListView) findViewById(R.id.list_item_history);
         tvDataEmpty = (TextView) findViewById(R.id.tv_data_empty);
-        spinnerFilter = (Spinner) findViewById(R.id.spinner_filter_category);
+        spinnerFilterByCategory = (Spinner) findViewById(R.id.spinner_filter_category);
+        spinnerFilterByMoney = (Spinner) findViewById(R.id.spinner_filter_money);
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -182,7 +192,7 @@ public class HistoryActivity extends AppCompatActivity {
                                 ArrayAdapter<ExpenseCategoryModel> adapter = new ArrayAdapter<ExpenseCategoryModel>(HistoryActivity.this,
                                         android.R.layout.simple_spinner_item, lstExpenseCategory);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinnerFilter.setAdapter(adapter);
+                                spinnerFilterByCategory.setAdapter(adapter);
                             } catch (Exception e) {
                                 //Toast.makeText(getActivity(), "Error when load data", Toast.LENGTH_LONG).show();
                             }
@@ -196,26 +206,15 @@ public class HistoryActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //Event selection change of spinner filter by category id
+        spinnerFilterByCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
                         NoFilterHistory();
                         break;
-                    case 1:
-                        FilterHistoryById(position);
-                        break;
-                    case 2:
-                        FilterHistoryById(position);
-                        break;
-                    case 3:
-                        FilterHistoryById(position);
-                        break;
-                    case 4:
-                        FilterHistoryById(position);
-                        break;
-                    case 5:
+                    default:
                         FilterHistoryById(position);
                         break;
                 }
@@ -223,6 +222,68 @@ public class HistoryActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        spinnerFilterByMoney.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        NoFilterHistory();
+                        break;
+                    case 1:
+                        db.collection(GlobalConst.ExpensesTable)
+                                .whereLessThan("Value", Double.valueOf("100000"))
+                                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
+                                            SetListHistoryToAdapter(lstHistory);
+                                        }
+                                    }
+                                });
+                        break;
+                    case 2:
+                        db.collection(GlobalConst.ExpensesTable)
+                                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
+                                .whereGreaterThan("Value", Double.valueOf("100000"))
+                                .whereLessThan("Value", Double.valueOf("500000"))
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
+                                            SetListHistoryToAdapter(lstHistory);
+                                        }
+                                    }
+                                });
+                        break;
+                    case 3:
+                        db.collection(GlobalConst.ExpensesTable)
+                                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
+                                .whereGreaterThan("Value", Double.valueOf("500000"))
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
+                                            SetListHistoryToAdapter(lstHistory);
+                                        }
+                                    }
+                                });
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 

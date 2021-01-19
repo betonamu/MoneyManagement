@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -111,7 +112,12 @@ public class AddFragment extends Fragment {
         btnSave = (Button) root.findViewById(R.id.btn_save);
         txtCreateAt = (EditText) root.findViewById(R.id.create_at);
         imgExpense = (ImageView) root.findViewById(R.id.img_expense);
-        btnSave.setOnClickListener(onSave);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSave();
+            }
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -167,6 +173,7 @@ public class AddFragment extends Fragment {
             }
         });
 
+        //Open gallery when click inside image to choose Image
         imgExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,69 +190,77 @@ public class AddFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    /**
-     * Event onclick of button save
-     */
-    public View.OnClickListener onSave = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            getMaxIdExpense(new ICallBackFireStore<Object>() {
-                @Override
-                public void onCallBack(List<Object> lstObject, Object value) {
-                    //validate user input
-                    if (TextUtils.isEmpty(txtValueMoney.getText().toString().trim())) {
-                        txtValueMoney.setError("Input money is required!");
-                        return;
-                    }
-                    if (TextUtils.isEmpty(txtCreateAt.getText().toString().trim())) {
-                        txtValueMoney.setError("Date is required!");
-                        return;
-                    }
-                    String[] splitBalance = txtValueMoney.getText().toString().split(" ");
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case R.id.btn_tick_save_actionbar:
+                onSave();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+
+
+    public void onSave() {
+        getMaxIdExpense(new ICallBackFireStore<Object>() {
+            @Override
+            public void onCallBack(List<Object> lstObject, Object value) {
+                //validate user input
+                if (TextUtils.isEmpty(txtValueMoney.getText().toString().trim())) {
+                    txtValueMoney.setError("Input money is required!");
+                    return;
+                }
+                if (TextUtils.isEmpty(txtCreateAt.getText().toString().trim())) {
+                    txtCreateAt.setError("Date is required!");
+                    return;
+                }
+                String[] splitBalance = txtValueMoney.getText().toString().split(" ");
 
                     /*input value have "," character
                     need remove "," character to parse double*/
-                    final Double valueMoney = Double.parseDouble(splitBalance[1].replace(",", ""));
-                    Date dateParse = null;
-                    try {
-                        dateParse = dateFormat.parse(txtCreateAt.getText().toString());
-                    } catch (ParseException e) {
-                        Toast.makeText(getActivity(), "The date is not in the correct format", Toast.LENGTH_LONG).show();
-                    }
-                    //Make timeStamp from date
-                    Timestamp createDate = new Timestamp(dateParse);
-                    String description = txtDescription.getText().toString();
-                    int maxId = Integer.parseInt(value.toString());
-                    String id = (maxId + 1) + "";
-                    String categoryId = ((ExpenseCategoryModel) spinnerMoney.getSelectedItem()).Id;
-
-                    //set empty for EditTexts after save
-                    txtValueMoney.setText("");
-                    txtCreateAt.setText("");
-                    txtDescription.setText("");
-
-                    //upload photo and save data expense to fireStore
-                    uploadPhoto(new ICallBackFireStore() {
-                        @Override
-                        public void onCallBack(List lstObject, Object value) {
-                            String photoUri = "";
-                            if (value != null && value != "") {
-                                photoUri = value.toString();
-                            }
-                            //Add data to model Expense
-                            ExpenseModel expense = new ExpenseModel(id, valueMoney, categoryId,
-                                    description, createDate, currentUserId, photoUri);
-
-                            imgExpense.setImageResource(R.drawable.image_no_available);
-                            //update data to firebase
-                            UpdateBalanceOfCurrentUser(valueMoney, expense);
-                        }
-                    });
-
+                final Double valueMoney = Double.parseDouble(splitBalance[1].replace(",", ""));
+                Date dateParse = null;
+                try {
+                    dateParse = dateFormat.parse(txtCreateAt.getText().toString());
+                } catch (ParseException e) {
+                    Toast.makeText(getActivity(), "The date is not in the correct format", Toast.LENGTH_LONG).show();
                 }
-            });
-        }
-    };
+                //Make timeStamp from date
+                Timestamp createDate = new Timestamp(dateParse);
+                String description = txtDescription.getText().toString();
+                int maxId = Integer.parseInt(value.toString());
+                String id = (maxId + 1) + "";
+                String categoryId = ((ExpenseCategoryModel) spinnerMoney.getSelectedItem()).Id;
+
+                //set empty for EditTexts after save
+                txtValueMoney.setText("");
+                txtCreateAt.setText("");
+                txtDescription.setText("");
+
+                //upload photo and save data expense to fireStore
+                uploadPhoto(new ICallBackFireStore() {
+                    @Override
+                    public void onCallBack(List lstObject, Object value) {
+                        String photoUri = "";
+                        if (value != null && value != "") {
+                            photoUri = value.toString();
+                        }
+                        //Add data to model Expense
+                        ExpenseModel expense = new ExpenseModel(id, valueMoney, categoryId,
+                                description, createDate, currentUserId, photoUri);
+
+                        imgExpense.setImageResource(R.drawable.image_no_available);
+                        //update data to firebase
+                        UpdateBalanceOfCurrentUser(valueMoney, expense);
+                    }
+                });
+
+            }
+        });
+    }
 
     /**
      * Get max current id in FireStore
@@ -294,22 +309,28 @@ public class AddFragment extends Fragment {
                 if (((UserModel) value).balance == null) {
                     ((UserModel) value).balance = 0.0;
                 }
-                Double balanceOfCurrentUser = ((UserModel) value).balance - valueMoney;
-                if (balanceOfCurrentUser < valueMoney) {
-                    GlobalFuc.DialogShowMessage(getActivity(), GlobalConst.AppTitle, "Your balance not enough!");
-                } else
-                    db.collection(GlobalConst.UsersTable).document(currentUserId)
-                            .update("balance", balanceOfCurrentUser)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        //Push data to FireStore
-                                        db.collection(GlobalConst.ExpensesTable).document().set(expense);
-                                        Toast.makeText(getActivity(), "Save data successfully", Toast.LENGTH_SHORT).show();
-                                    }
+                Double balanceOfCurrentUser;
+                if (expense.CategoryId.equals("7"))
+                    balanceOfCurrentUser = ((UserModel) value).balance + expense.Value;
+                else {
+                    balanceOfCurrentUser = ((UserModel) value).balance - valueMoney;
+                    if (balanceOfCurrentUser < valueMoney) {
+                        GlobalFuc.DialogShowMessage(getActivity(), GlobalConst.AppTitle, "Your balance not enough!");
+                        return;
+                    }
+                }
+                db.collection(GlobalConst.UsersTable).document(currentUserId)
+                        .update("balance", balanceOfCurrentUser)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    //Push data to FireStore
+                                    db.collection(GlobalConst.ExpensesTable).document().set(expense);
+                                    Toast.makeText(getActivity(), "Save data successfully", Toast.LENGTH_SHORT).show();
                                 }
-                            });
+                            }
+                        });
             }
         });
     }
