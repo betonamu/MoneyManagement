@@ -1,275 +1,332 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".ui.home.HomeFragment">
-
-    <TextView
-        android:id="@+id/tvTotal"
-        android:layout_width="94dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:hint="@string/prompt_total"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvSurplus"
-        android:layout_width="363dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/edit_text_style"
-        android:hint="@string/prompt_surplus"
-        android:inputType="textEmailAddress"
-        android:selectAllOnFocus="true"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvLoan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotal"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tvSpend"
-        android:layout_width="94dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:hint="@string/prompt_spend"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutSpend"
-        app:layout_constraintStart_toStartOf="parent" />
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayoutSpend"
-        android:layout_width="363dp"
-        android:layout_height="230dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/edit_text_style"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/btnFood"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/edit_text_style"
-            android:src="@drawable/food"
-            app:layout_constraintBottom_toTopOf="@+id/tvFood"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeFragment">
 
         <TextView
-            android:id="@+id/tvFood"
-            android:layout_width="65dp"
-            android:layout_height="25dp"
-            android:gravity="center"
-            android:hint="@string/prompt_food"
-            app:layout_constraintStart_toStartOf="@id/btnFood"
-            app:layout_constraintTop_toBottomOf="@id/btnFood" />
-
-        <ImageButton
-            android:id="@+id/btnLiving"
-            android:layout_width="65dp"
+            android:id="@+id/tvBlank"
+            android:layout_width="wrap_content"
             android:layout_height="65dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/edit_text_style"
-            android:src="@drawable/living"
-            app:layout_constraintEnd_toStartOf="@id/btnCar"
-            app:layout_constraintStart_toEndOf="@id/btnFood"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvLiving"
-            android:layout_width="65dp"
-            android:layout_height="25dp"
             android:gravity="center"
-            android:hint="@string/prompt_living"
-            app:layout_constraintEnd_toEndOf="@id/btnLiving"
-            app:layout_constraintStart_toStartOf="@id/btnLiving"
-            app:layout_constraintTop_toBottomOf="@id/btnLiving" />
-
-        <ImageButton
-            android:id="@+id/btnCar"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:background="@drawable/edit_text_style"
-            android:src="@drawable/car"
-            app:layout_constraintBottom_toTopOf="@+id/tvCar"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/tvCar"
-            android:layout_width="65dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="112dp"
-            android:gravity="center"
-            android:hint="@string/prompt_car"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btnBoy"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/edit_text_style"
-            android:src="@drawable/boy"
-            app:layout_constraintBottom_toTopOf="@+id/tvBoy"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFood" />
-
-        <TextView
-            android:id="@+id/tvBoy"
-            android:layout_width="65dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center"
-            android:hint="@string/prompt_boy"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btnFashion"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/edit_text_style"
-            android:src="@drawable/fashion"
-            app:layout_constraintBottom_toTopOf="@+id/tvFashion"
-            app:layout_constraintEnd_toStartOf="@id/btnHealthCare"
-            app:layout_constraintStart_toEndOf="@id/btnBoy"
-            app:layout_constraintTop_toBottomOf="@+id/tvLiving" />
-
-        <TextView
-            android:id="@+id/tvFashion"
-            android:layout_width="85dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center"
-            android:hint="@string/prompt_fashion"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvHealthCare"
-            app:layout_constraintStart_toEndOf="@+id/tvBoy" />
-
-        <ImageButton
-            android:id="@+id/btnHealthCare"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/edit_text_style"
-            android:src="@drawable/healthcare"
-            app:layout_constraintBottom_toTopOf="@+id/tvHealthCare"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCar" />
-
-        <TextView
-            android:id="@+id/tvHealthCare"
-            android:layout_width="65dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center"
-            android:hint="@string/prompt_healthcare"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="363dp"
-        android:layout_height="115dp"
-        android:layout_marginBottom="36dp"
-        android:background="@drawable/edit_text_style"
-        app:layout_constraintBottom_toTopOf="@+id/tvSpend"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/btnLoand"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:background="@drawable/edit_text_style"
-            android:src="@drawable/personal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.08" />
-
-        <ImageButton
-            android:id="@+id/btnLend"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="66dp"
-            android:layout_marginLeft="68dp"
-            android:background="@drawable/edit_text_style"
-            android:src="@drawable/money"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnLoand"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.12" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutSpend" />
 
         <TextView
-            android:id="@+id/tv7"
-            android:layout_width="65dp"
+            android:id="@+id/tvCollect"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:hint="@string/prompt_collect"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSurplus" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutCollect"
+            android:layout_width="0dp"
+            android:layout_height="115dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCollect">
+
+            <ImageButton
+                android:id="@+id/btnWallet"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_text_style"
+                android:src="@drawable/wallet"
+                app:layout_constraintBottom_toTopOf="@+id/tvWallet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvWallet"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:hint="@string/prompt_salary"
+                app:layout_constraintStart_toStartOf="@id/btnWallet"
+                app:layout_constraintTop_toBottomOf="@id/btnWallet" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:hint="@string/prompt_total"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSurplus"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_style"
+            android:hint="@string/prompt_surplus"
+            android:inputType="textEmailAddress"
+            android:selectAllOnFocus="true"
+            android:textSize="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
+
+        <TextView
+            android:id="@+id/tvSpend"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:hint="@string/prompt_spend"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutLoan" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutSpend"
+            android:layout_width="0dp"
+            android:layout_height="230dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSpend">
+
+            <ImageButton
+                android:id="@+id/btnFood"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_text_style"
+                android:src="@drawable/food"
+                app:layout_constraintBottom_toTopOf="@+id/tvFood"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvFood"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:hint="@string/prompt_food"
+                app:layout_constraintStart_toStartOf="@id/btnFood"
+                app:layout_constraintTop_toBottomOf="@id/btnFood" />
+
+            <ImageButton
+                android:id="@+id/btnLiving"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_text_style"
+                android:src="@drawable/living"
+                app:layout_constraintEnd_toStartOf="@id/btnCar"
+                app:layout_constraintStart_toEndOf="@id/btnFood"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLiving"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:hint="@string/prompt_living"
+                app:layout_constraintEnd_toEndOf="@id/btnLiving"
+                app:layout_constraintStart_toStartOf="@id/btnLiving"
+                app:layout_constraintTop_toBottomOf="@id/btnLiving" />
+
+            <ImageButton
+                android:id="@+id/btnCar"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:background="@drawable/edit_text_style"
+                android:src="@drawable/car"
+                app:layout_constraintBottom_toTopOf="@+id/tvCar"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tvCar"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="112dp"
+                android:gravity="center"
+                android:hint="@string/prompt_car"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btnBoy"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/edit_text_style"
+                android:src="@drawable/boy"
+                app:layout_constraintBottom_toTopOf="@+id/tvBoy"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvFood" />
+
+            <TextView
+                android:id="@+id/tvBoy"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="center"
+                android:hint="@string/prompt_boy"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btnFashion"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/edit_text_style"
+                android:src="@drawable/fashion"
+                app:layout_constraintBottom_toTopOf="@+id/tvFashion"
+                app:layout_constraintEnd_toStartOf="@id/btnHealthCare"
+                app:layout_constraintStart_toEndOf="@id/btnBoy"
+                app:layout_constraintTop_toBottomOf="@+id/tvLiving" />
+
+            <TextView
+                android:id="@+id/tvFashion"
+                android:layout_width="85dp"
+                android:layout_height="25dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="center"
+                android:hint="@string/prompt_fashion"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvHealthCare"
+                app:layout_constraintStart_toEndOf="@+id/tvBoy" />
+
+            <ImageButton
+                android:id="@+id/btnHealthCare"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/edit_text_style"
+                android:src="@drawable/healthcare"
+                app:layout_constraintBottom_toTopOf="@+id/tvHealthCare"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCar" />
+
+            <TextView
+                android:id="@+id/tvHealthCare"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:layout_marginBottom="4dp"
+                android:gravity="center"
+                android:hint="@string/prompt_healthcare"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvLoan"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="15dp"
             android:gravity="center"
             android:hint="@string/prompt_loan"
-            app:layout_constraintStart_toStartOf="@+id/btnLoand"
-            app:layout_constraintTop_toBottomOf="@+id/btnLoand" />
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutCollect" />
 
-        <TextView
-            android:id="@+id/tv8"
-            android:layout_width="65dp"
-            android:layout_height="25dp"
-            android:gravity="center"
-            android:hint="@string/prompt_lend"
-            app:layout_constraintEnd_toEndOf="@+id/btnLend"
-            app:layout_constraintStart_toStartOf="@+id/btnLend"
-            app:layout_constraintTop_toBottomOf="@+id/btnLend" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutLoan"
+            android:layout_width="0dp"
+            android:layout_height="115dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLoan">
 
+            <ImageButton
+                android:id="@+id/btnLoand"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/edit_text_style"
+                android:src="@drawable/personal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btnLend"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/edit_text_style"
+                android:src="@drawable/money"
+                app:layout_constraintEnd_toStartOf="@+id/btnblank"
+                app:layout_constraintStart_toEndOf="@+id/btnLoand"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvLoan2"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:hint="@string/prompt_loan"
+                app:layout_constraintStart_toStartOf="@+id/btnLoand"
+                app:layout_constraintTop_toBottomOf="@+id/btnLoand" />
+
+            <TextView
+                android:id="@+id/tvLend"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:hint="@string/prompt_lend"
+                app:layout_constraintEnd_toEndOf="@+id/btnLend"
+                app:layout_constraintStart_toStartOf="@+id/btnLend"
+                app:layout_constraintTop_toBottomOf="@+id/btnLend" />
+
+            <ImageButton
+                android:id="@+id/btnblank"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/edit_text_style"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/tvLoan"
-        android:layout_width="94dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:hint="@string/prompt_loan"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <!--    <com.example.doanjava.helpers.CurrencyEditText-->
-    <!--        android:id="@+id/money"-->
-    <!--        android:layout_width="351dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@drawable/edit_text_style"-->
-    <!--        android:hint="@string/enter_money"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />-->
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>

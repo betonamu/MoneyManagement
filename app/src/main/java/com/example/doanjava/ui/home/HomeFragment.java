@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private List<UserModel> lstUser = new LinkedList<>();
     private TextView tvSurplus;
-    ImageButton btnLoand,btnLend,btnFood,btnLiving,btnCar,btnBoy,btnFashion,btnHealthCare;
+    ImageButton btnLoand,btnLend,btnFood,btnLiving,btnCar,btnBoy,btnFashion,btnHealthCare,btnWallet;
 
 
     private FirebaseFirestore db;
@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment {
         btnBoy = root.findViewById(R.id.btnBoy);
         btnFashion = root.findViewById(R.id.btnFashion);
         btnHealthCare = root.findViewById(R.id.btnHealthCare);
+        btnWallet = root.findViewById(R.id.btnWallet);
 
         btnLoand.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +112,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 homeViewModel.setPositionSpinner("5");
+                MainActivity.SwitchFragment(R.id.navigation_add);
+            }
+        });
+
+        btnWallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeViewModel.setPositionSpinner("6");
                 MainActivity.SwitchFragment(R.id.navigation_add);
             }
         });
