@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.doanjava.R;
 import com.example.doanjava.common.GlobalConst;
+import com.example.doanjava.common.GlobalFuc;
 import com.example.doanjava.data.model.UserModel;
 import com.example.doanjava.interfaces.ICallBackFireStore;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +32,9 @@ import java.util.List;
 public class InformationUserActivity extends AppCompatActivity {
     Button btnChangePassword, btnUpdateBalance;
     ImageView imgAccount;
+    TextView tvFullName, tvBalance;
+
+    //shared variables
     List<UserModel> lstUser = new LinkedList<>();
 
     private FirebaseAuth firebaseAuth;
@@ -44,6 +49,8 @@ public class InformationUserActivity extends AppCompatActivity {
         btnChangePassword = (Button) findViewById(R.id.btn_change_password_user_activity);
         btnUpdateBalance = (Button) findViewById(R.id.btn_update_balance_user_activity);
         imgAccount = (ImageView) findViewById(R.id.img_account_user_activity);
+        tvBalance = (TextView) findViewById(R.id.tv_balance_user_activity);
+        tvFullName = (TextView) findViewById(R.id.tv_full_name_user_activity);
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -67,11 +74,19 @@ public class InformationUserActivity extends AppCompatActivity {
             public void onCallBack(List<UserModel> lstObject, Object value) {
                 if (lstObject.size() != 0) {
                     if (lstObject.get(0).photoUrl != null && lstObject.get(0).photoUrl != "") {
-                        Uri photoUri = Uri.parse(lstObject.get(0).photoUrl);
+                        UserModel currentItem = lstObject.get(0);
+                        Uri photoUri = Uri.parse(currentItem.photoUrl);
                         Glide.with(InformationUserActivity.this)
                                 .load(photoUri)
                                 .apply(RequestOptions.circleCropTransform())
                                 .into(imgAccount);
+                        tvFullName.setText(currentItem.fullName);
+                        String balance;
+                        if(lstObject.get(0).balance != null)
+                            balance  = GlobalFuc.CurrencyFormat(lstObject.get(0).balance);
+                        else
+                            balance = "0";
+                        tvBalance.setText("Số dư: " + balance + " VND");
                     }
                 }
             }

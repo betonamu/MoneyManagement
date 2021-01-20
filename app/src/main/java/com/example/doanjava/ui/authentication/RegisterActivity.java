@@ -131,10 +131,8 @@ public class RegisterActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         PReqCode);
             }
-
         } else
             openGallery();
-
     }
 
     @Override
@@ -158,7 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
         fullName = mFullName.getText().toString().trim();
 
         if (TextUtils.isEmpty(fullName)) {
-            mEmail.setError(getResources().getString(R.string.required_name));
+            mFullName.setError(getResources().getString(R.string.required_name));
             return;
         }
         if (TextUtils.isEmpty(username)) {
@@ -169,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         if (TextUtils.isEmpty(phoneNumber)) {
-            mEmail.setError(getResources().getString(R.string.required_phone));
+            mPhoneNumber.setError(getResources().getString(R.string.required_phone));
             return;
         }
         if (TextUtils.isEmpty(password)) {
@@ -241,8 +239,8 @@ public class RegisterActivity extends AppCompatActivity {
                     });
                 }
             });
-        }else{
-            callBack.onCallBack(null,null);
+        } else {
+            callBack.onCallBack(null, null);
         }
     }
 }

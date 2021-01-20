@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,6 +62,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description_update"></EditText>
 
+        <ImageView
+            android:id="@+id/img_expense_update"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/image_no_available"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_at_update">
+
+        </ImageView>
+
         <Button
             android:id="@+id/btn_update"
             android:layout_width="wrap_content"
@@ -69,7 +82,7 @@
             android:text="@string/update"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_at_update" />
+            app:layout_constraintTop_toBottomOf="@id/img_expense_update" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 

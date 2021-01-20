@@ -12,13 +12,13 @@
     <string name="redirect_login">Đã có tài khoản? Đăng nhập ngay</string>
     <string name="redirect_register">Chưa có tài khoản? Đăng ký ngay</string>
     <string name="login_failed">Đăng nhập thất bại</string>
-    <string name="invalid_password">Mật khẩu phải lớn hơn 5 ký tự</string>
-    <string name="required_re_password">Vui lòng nhập mật khẩu xác nhận</string>
-    <string name="required_phone">Vui lòng nhập số điện thoại</string>
-    <string name="required_password">Vui lòng nhập mật khẩu</string>
-    <string name="required_name">Vui lòng nhập họ và tên</string>
-    <string name="required_username">Vui lòng nhập tên tài khoản</string>
-    <string name="invalid_username">Email không đúng định dạng</string>
+    <string name="invalid_password">Mật khẩu phải lớn hơn 5 ký tự!</string>
+    <string name="required_re_password">Vui lòng nhập mật khẩu xác nhận!</string>
+    <string name="required_phone">Vui lòng nhập số điện thoại!</string>
+    <string name="required_password">Vui lòng nhập mật khẩu!</string>
+    <string name="required_name">Vui lòng nhập họ và tên!</string>
+    <string name="required_username">Vui lòng nhập tên tài khoản!</string>
+    <string name="invalid_username">Email không đúng định dạng!</string>
     <string name="action_sign_in_short">Đăng nhập</string>
     <string name="action_sign_up">Đăng ký</string>
     <string name="prompt_re_password">Mật khẩu xác nhận</string>
@@ -75,5 +75,21 @@
     <string name="expenditure_statistics_table">Bảng thống kê chi tiêu</string>
 
     <string name="update">"Cập nhật "</string>
+    <string name="update_expense_successfully">Cập nhật chi tiêu thành công</string>
+    <string name="required_date">Vui lòng nhập ngày!</string>
+    <string name="required_money">Vui lòng nhập tiền!</string>
+    <string name="action_sign_in">Đăng nhập</string>
+    <string name="title_setting">Cài đặt</string>
+    <string name="title_update_history">Cập nhât chi tiêu</string>
+    <string name="no_filter">Không lọc</string>
+    <string name="no_data">Không có dữ liệu</string>
+
+    <string name="prompt_collect">Thu tiền</string>
+    <string name="prompt_salary">Lương</string>
+
+    <string name="item_less_100">Nhỏ hơn 100K</string>
+    <string name="item_100_500">Từ 100 - 500K</string>
+    <string name="item_greater_500">Lớn hơn 500K</string>
+
 
 </resources>
