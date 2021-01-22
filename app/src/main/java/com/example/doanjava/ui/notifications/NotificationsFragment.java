@@ -78,11 +78,11 @@ public class NotificationsFragment extends Fragment {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db;
-    FirebaseStorage storage;
+    private FirebaseStorage storage;
 
-    final int REQUEST_CODE = 2;
+    private final int REQUEST_CODE = 2;
     static int PReqCode = 1;
-    Uri pickedImgUri;
+    private Uri pickedImgUri;
 
     class ListItemAccountAdapter extends ArrayAdapter<String> {
         public ListItemAccountAdapter(@NonNull Context context, int resource, int textViewResourceId) {
