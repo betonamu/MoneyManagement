@@ -1,13 +1,13 @@
 package com.example.doanjava.data.model;
 
-public class LoanCatecoryModel {
+public class LoanCategoryModel {
     public String Id;
     public String Name;
 
-    public LoanCatecoryModel() {
+    public LoanCategoryModel() {
     }
 
-    public LoanCatecoryModel(String id, String name) {
+    public LoanCategoryModel(String id, String name) {
         Id = id;
         Name = name;
     }
