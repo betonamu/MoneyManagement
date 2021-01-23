@@ -40,7 +40,8 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private List<UserModel> lstUser = new LinkedList<>();
     private TextView tvSurplus;
-    ImageButton btnLoand,btnLend,btnFood,btnLiving,btnCar,btnBoy,btnFashion,btnHealthCare,btnWallet;
+    ImageButton btnLoan,btnLend,btnFood,btnLiving,btnCar,btnBoy,btnFashion,btnHealthCare,btnWallet;
+
 
 
     private FirebaseFirestore db;
@@ -51,7 +52,7 @@ public class HomeFragment extends Fragment {
         homeViewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         tvSurplus = (TextView) root.findViewById(R.id.tvSurplus);
-        btnLoand = root.findViewById(R.id.btnLoand);
+        btnLoan = root.findViewById(R.id.btnLoan);
         btnLend = root.findViewById(R.id.btnLend);
         btnFood = root.findViewById(R.id.btnFood);
         btnLiving = root.findViewById(R.id.btnLiving);
@@ -61,10 +62,27 @@ public class HomeFragment extends Fragment {
         btnHealthCare = root.findViewById(R.id.btnHealthCare);
         btnWallet = root.findViewById(R.id.btnWallet);
 
-        btnLoand.setOnClickListener(new View.OnClickListener() {
+        btnLoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LoanActivity.class));
+                Intent intent = new Intent(getActivity(),LoanActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("Cate",1);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+            }
+        });
+
+        btnLend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),LoanActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("Cate",0);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
             }
         });
 
@@ -124,18 +142,18 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        btnLend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LoanActivity.class));
-            }
-        });
-
 
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
+
+        return root;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         GetUserInformation(new ICallBackFireStore<UserModel>() {
             @Override
             public void onCallBack(List<UserModel> lstObject, Object value) {
@@ -149,7 +167,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-        return root;
     }
 
     @Override

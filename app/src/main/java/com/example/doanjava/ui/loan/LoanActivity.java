@@ -1,6 +1,7 @@
 package com.example.doanjava.ui.loan;
 
 import android.app.DatePickerDialog;
+import android.app.FragmentManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
@@ -74,6 +75,8 @@ public class LoanActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loan);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         loanCategoryModel = new LoanCategoryModel();
         lstLoanCategory = new ArrayList<>();
 
@@ -91,6 +94,8 @@ public class LoanActivity extends AppCompatActivity{
         storage = FirebaseStorage.getInstance();
         currentUserId = firebaseAuth.getCurrentUser().getUid();
 
+
+
         //Load data from FireStore to fill in Spinner category
         db.collection("LoanCategories").orderBy("Id").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -103,6 +108,8 @@ public class LoanActivity extends AppCompatActivity{
                                         android.R.layout.simple_spinner_item, lstLoanCategory);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 spinnerMoney.setAdapter(adapter);
+                                int category = getIntent().getIntExtra("Cate",0);
+                                spinnerMoney.setSelection(category);
 
                                 //Get data passed from HomeFragment using ViewModel
 //                                homeViewModel.getPositionSpinner().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -313,5 +320,19 @@ public class LoanActivity extends AppCompatActivity{
 
             }
         });
+    }
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            fm.popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
