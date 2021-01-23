@@ -171,7 +171,7 @@ public class UpdateHistoryActivity extends AppCompatActivity {
 
                                 //update data to FireStore
                                 UpdateHistoryExpense(currentDocumentId, expenseModel);
-                                UpdateBalanceOfCurrentUser(balanceToUpdate);
+                                UpdateBalanceOfCurrentUser(balanceToUpdate, expenseModel);
                             }
                         });
                     }
@@ -220,7 +220,8 @@ public class UpdateHistoryActivity extends AppCompatActivity {
     }
 
     public void SetTextForControls() {
-        txtValueMoney.setText("VND " + GlobalFuc.CurrencyFormat(value));
+        String balance = GlobalFuc.CurrencyFormat(value).replace(".",",");
+        txtValueMoney.setText("VND " + balance);
         txtDescription.setText(description);
         txtCreateAt.setText(createAt);
         if (photoUri != null && photoUri != "") {
@@ -267,27 +268,34 @@ public class UpdateHistoryActivity extends AppCompatActivity {
         });
     }
 
-    public void UpdateBalanceOfCurrentUser(Double valueMoney) {
+    public void UpdateBalanceOfCurrentUser(Double valueMoney, ExpenseModel expense) {
         GetBalanceOfCurrentUserToUpdate(new ICallBackFireStore() {
             @Override
             public void onCallBack(List lstObject, Object value) {
                 if (((UserModel) value).balance == null) {
                     ((UserModel) value).balance = 0.0;
                 }
-                Double balanceOfCurrentUser = ((UserModel) value).balance - valueMoney;
-                if (balanceOfCurrentUser < valueMoney) {
-                    GlobalFuc.DialogShowMessage(UpdateHistoryActivity.this, GlobalConst.AppTitle, "Your balance not enough!");
-                } else
-                    db.collection(GlobalConst.UsersTable).document(currentUserId)
-                            .update("balance", balanceOfCurrentUser)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(UpdateHistoryActivity.this, "Save data successfully", Toast.LENGTH_SHORT).show();
-                                    }
+                Double balanceOfCurrentUser;
+                if (expense.CategoryId.equals("7"))
+                    balanceOfCurrentUser = ((UserModel) value).balance + valueMoney;
+                else {
+                    balanceOfCurrentUser = ((UserModel) value).balance - valueMoney;
+                    if (balanceOfCurrentUser < valueMoney) {
+                        GlobalFuc.DialogShowMessage(UpdateHistoryActivity.this,
+                                GlobalConst.AppTitle, "Your balance not enough!");
+                        return;
+                    }
+                }
+                db.collection(GlobalConst.UsersTable).document(currentUserId)
+                        .update("balance", balanceOfCurrentUser)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(UpdateHistoryActivity.this, "Save data successfully", Toast.LENGTH_SHORT).show();
                                 }
-                            });
+                            }
+                        });
             }
         });
     }

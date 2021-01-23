@@ -108,9 +108,9 @@
     </string-array>
 
     <string-array name="list_item_contact">
-        <item>Liên hệ với chúng tôi qua facebook</item>
-        <item>Liên hệ với chúng tôi qua email</item>
-        <item>Lịch sử</item>
+        <item>Liên hệ với thành viên 1 qua facebook</item>
+        <item>Liên hệ với thành viên 2 qua facebook</item>
+        <item>Liên hệ với thành viên 3 qua facebook</item>
     </string-array>
 
     <string-array name="list_item_language">

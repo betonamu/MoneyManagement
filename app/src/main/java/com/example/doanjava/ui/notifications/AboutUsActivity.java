@@ -34,10 +34,12 @@ import java.util.List;
 
 public class AboutUsActivity extends AppCompatActivity {
     ImageView imgApp;
-    TextView tvVersion,tvCreateBy;
+    TextView tvVersion, tvCreateBy;
     String[] arrItemContact;
     ListView lsvContact;
     ListItemContactAdapter adapter;
+
+    String urlFacebook, pageId, urlBrowser;
 
     class ListItemContactAdapter extends ArrayAdapter<String> {
         public ListItemContactAdapter(@NonNull Context context, int resource, int textViewResourceId) {
@@ -67,7 +69,7 @@ public class AboutUsActivity extends AppCompatActivity {
                     imageView.setImageResource(R.drawable.facebook);
                     break;
                 case 1:
-                    imageView.setImageResource(R.drawable.gmail);
+                    imageView.setImageResource(R.drawable.facebook);
                     break;
                 case 2:
                     imageView.setImageResource(R.drawable.facebook);
@@ -103,9 +105,26 @@ public class AboutUsActivity extends AppCompatActivity {
         lsvContact.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
-                        LaunchFacebook();
+                        urlFacebook = GlobalConst.UrlFacebook;
+                        pageId = GlobalConst.PageIdFacebookMember1;
+                        urlBrowser = GlobalConst.UrlBrowserFacebook;
+                        LaunchFacebook(urlFacebook, pageId, urlBrowser);
+                        break;
+
+                    case 1:
+                        urlFacebook = GlobalConst.UrlFacebook;
+                        pageId = GlobalConst.PageIdFacebookMember2;
+                        urlBrowser = GlobalConst.UrlBrowserFacebook;
+                        LaunchFacebook(urlFacebook, pageId, urlBrowser);
+                        break;
+
+                    case 2:
+                        urlFacebook = GlobalConst.UrlFacebook;
+                        pageId = GlobalConst.PageIdFacebookMember3;
+                        urlBrowser = GlobalConst.UrlBrowserFacebook;
+                        LaunchFacebook(urlFacebook, pageId, urlBrowser);
                         break;
                 }
             }
@@ -113,8 +132,8 @@ public class AboutUsActivity extends AppCompatActivity {
 
     }
 
-    public final void LaunchFacebook() {
-        final String urlFb = GlobalConst.UrlFacebook + GlobalConst.PageIdFacebook;
+    public final void LaunchFacebook(String urlFacebook, String pageId, String urlBrowser) {
+        final String urlFb = urlFacebook + pageId;
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(urlFb));
 
@@ -125,8 +144,8 @@ public class AboutUsActivity extends AppCompatActivity {
                 packageManager.queryIntentActivities(intent,
                         PackageManager.MATCH_DEFAULT_ONLY);
         if (list.size() == 0) {
-            final String urlBrowser = GlobalConst.UrlBrowserFacebook + GlobalConst.PageIdFacebook;
-            intent.setData(Uri.parse(urlBrowser));
+            final String urlBrowserFacebook = urlBrowser + pageId;
+            intent.setData(Uri.parse(urlBrowserFacebook));
         }
         startActivity(intent);
     }

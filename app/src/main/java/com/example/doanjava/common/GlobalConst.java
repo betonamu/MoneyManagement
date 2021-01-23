@@ -24,11 +24,15 @@ public class GlobalConst {
     public final static int SecondsWakeUpDailyNotification = 0;
 
     public final static String AppVersion = "1.0";
-    public final static String CreateBy = "Nhóm BBB Đại Học HUTECH";
+    public final static String CreateBy = "Nhóm NAQ Đại Học HUTECH";
 
-    public final static String PageIdFacebook = "100008727483897";
-    public final static String UrlBrowserFacebook = "https://www.facebook.com/";
     public final static String UrlFacebook = "fb://profile/";
+    public final static String UrlBrowserFacebook = "https://www.facebook.com/";
+
+    public final static String PageIdFacebookMember1 = "100008727483897";
+    public final static String PageIdFacebookMember2 = "100007971273696";
+    public final static String PageIdFacebookMember3 = "100005131907630";
+
 
 
     public final static String prefix = "VND ";

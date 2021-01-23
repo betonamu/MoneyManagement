@@ -225,67 +225,67 @@ public class HistoryActivity extends AppCompatActivity {
             }
         });
 
-        spinnerFilterByMoney.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        NoFilterHistory();
-                        break;
-                    case 1:
-                        db.collection(GlobalConst.ExpensesTable)
-                                .whereLessThan("Value", Double.valueOf("100000"))
-                                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
-                                            SetListHistoryToAdapter(lstHistory);
-                                        }
-                                    }
-                                });
-                        break;
-                    case 2:
-                        db.collection(GlobalConst.ExpensesTable)
-                                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
-                                .whereGreaterThan("Value", Double.valueOf("100000"))
-                                .whereLessThan("Value", Double.valueOf("500000"))
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
-                                            SetListHistoryToAdapter(lstHistory);
-                                        }
-                                    }
-                                });
-                        break;
-                    case 3:
-                        db.collection(GlobalConst.ExpensesTable)
-                                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
-                                .whereGreaterThan("Value", Double.valueOf("500000"))
-                                .get()
-                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                        if (task.isSuccessful()) {
-                                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
-                                            SetListHistoryToAdapter(lstHistory);
-                                        }
-                                    }
-                                });
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        spinnerFilterByMoney.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                switch (position) {
+////                    case 0:
+////                        NoFilterHistory();
+////                        break;
+////                    case 1:
+////                        db.collection(GlobalConst.ExpensesTable)
+////                                .whereLessThan("Value", Double.valueOf("100000"))
+////                                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
+////                                .get()
+////                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+////                                    @Override
+////                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+////                                        if (task.isSuccessful()) {
+////                                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
+////                                            SetListHistoryToAdapter(lstHistory);
+////                                        }
+////                                    }
+////                                });
+////                        break;
+////                    case 2:
+////                        db.collection(GlobalConst.ExpensesTable)
+////                                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
+////                                .whereGreaterThan("Value", Double.valueOf("100000"))
+////                                .whereLessThan("Value", Double.valueOf("500000"))
+////                                .get()
+////                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+////                                    @Override
+////                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+////                                        if (task.isSuccessful()) {
+////                                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
+////                                            SetListHistoryToAdapter(lstHistory);
+////                                        }
+////                                    }
+////                                });
+////                        break;
+////                    case 3:
+////                        db.collection(GlobalConst.ExpensesTable)
+////                                .whereEqualTo("UserId", firebaseAuth.getCurrentUser().getUid())
+////                                .whereGreaterThan("Value", Double.valueOf("500000"))
+////                                .get()
+////                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+////                                    @Override
+////                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+////                                        if (task.isSuccessful()) {
+////                                            lstHistory = task.getResult().toObjects(ExpenseModel.class);
+////                                            SetListHistoryToAdapter(lstHistory);
+////                                        }
+////                                    }
+////                                });
+////                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
     }
 
