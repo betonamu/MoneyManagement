@@ -282,7 +282,7 @@
             app:layout_constraintTop_toBottomOf="@id/tvLoan">
 
             <ImageButton
-                android:id="@+id/btnLoand"
+                android:id="@+id/btnLoan"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 android:background="@drawable/edit_text_style"
@@ -297,7 +297,7 @@
                 android:background="@drawable/edit_text_style"
                 android:src="@drawable/money"
                 app:layout_constraintEnd_toStartOf="@+id/btnblank"
-                app:layout_constraintStart_toEndOf="@+id/btnLoand"
+                app:layout_constraintStart_toEndOf="@+id/btnLoan"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -306,8 +306,8 @@
                 android:layout_height="25dp"
                 android:gravity="center"
                 android:hint="@string/prompt_loan"
-                app:layout_constraintStart_toStartOf="@+id/btnLoand"
-                app:layout_constraintTop_toBottomOf="@+id/btnLoand" />
+                app:layout_constraintStart_toStartOf="@+id/btnLoan"
+                app:layout_constraintTop_toBottomOf="@+id/btnLoan" />
 
             <TextView
                 android:id="@+id/tvLend"
