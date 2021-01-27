@@ -7,3 +7,5 @@ password: password
  - Java
  - Android native
  - SDK 16 -> 30
+ - Firebase FireStore
+ - Firebase Storage
